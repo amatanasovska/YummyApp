@@ -23,7 +23,7 @@ textarea {
     max-width: 280px;
 }
 
-#registerLink, #loginLink, #shoppingListLink {
+#registerLink, #loginLink, #shoppingListLink, #accountLink,#logOffLink {
     text-decoration: none;
     color: black;
 
@@ -35,4 +35,8 @@ textarea {
 .nav-tab:hover {
     background-color: rgba(128, 128, 128, 0.1);
     border-radius: 5px;
+}
+.nav-tab {
+    text-decoration: none;
+    color: black;
 }
