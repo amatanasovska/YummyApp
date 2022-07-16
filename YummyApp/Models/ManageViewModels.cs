@@ -83,4 +83,12 @@ namespace YummyApp.Models
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
     }
+
+    public class AddToRoleModel
+    {
+        [Required]
+        public string Email { get; set; }
+        public List<string> roles { get; set; }
+        public string selectedRole { get; set; }
+    }
 }

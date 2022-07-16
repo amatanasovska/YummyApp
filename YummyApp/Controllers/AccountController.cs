@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -156,7 +157,8 @@ namespace YummyApp.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+                    UserManager.AddToRole(user.Id, "StandardUser");
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -171,7 +173,39 @@ namespace YummyApp.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+        public ActionResult SiteSettings()
+        {
+            return View();
+        }
+        [Authorize(Roles = "Admin")]
+        public ActionResult AddUserToRole()
+        {
+            AddToRoleModel model = new AddToRoleModel();
+            model.roles = new List<string>() { "Admin", "Editor", "User" };
+            return View(model);
+        }
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public ActionResult AddUserToRole(AddToRoleModel model)
+        {
+            var email = model.Email;
+            var user = UserManager.FindByEmail(model.Email);
+            if (user == null)
+                throw new HttpException(404, "There is no user with email: " + model.Email);
 
+            UserManager.AddToRole(user.Id, model.selectedRole);
+            return RedirectToAction("Index", "Clients");
+        }
+        [Authorize(Roles = "Admin")]
+        public ActionResult ListRecipes()
+        {
+            return View();
+        }
+        [Authorize(Roles = "Admin")]
+        public ActionResult ManageEditors()
+        {
+            return View();
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

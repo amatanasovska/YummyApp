@@ -1,0 +1,10 @@
+﻿.custom-card:hover {
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.custom-card {
+    text-decoration: none;
+    color: black;
+    border-color:rgb(183, 178, 178)  !important;
+}
+
