@@ -15,25 +15,35 @@
             </a>|
         </div>
     </li>
+    <li class="nav-item dropdown nav-tab">
+        <a class="nav-link dropdown-toggle tab-nav" id="accountLink" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Account</a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Saved recipes</a>
+            <a class="dropdown-item" href="#">My ratings</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Account settings</a>
+            <a class="dropdown-item" href="#">Site settings</a>
+            <a class="dropdown-item" href="#">Log off</a>
+        </div>
+    </li>
+    @*<li style="text-decoration:none" class="nav-item ">@Html.ActionLink("Account", "Account", "Account", routeValues: null, htmlAttributes: new { id = "accountLink", @class = "nav-link tab-nav" })</li>
+        @*<li style="text-decoration:none" class="nav-item nav-tab"><a class="nav-link tab-nav" href="javascript:document.getElementById('logoutForm').submit()" id="logOffLink">Log off</a></li>*@
 
-    <li style="text-decoration:none" class="nav-item nav-tab">@Html.ActionLink("Account", "Account", "Account", routeValues: null, htmlAttributes: new { id = "accountLink", @class = "nav-link tab-nav" })</li>
-    <li style="text-decoration:none" class="nav-item nav-tab"><a class = "nav-link tab-nav" href="javascript:document.getElementById('logoutForm').submit()"  id = "logOffLink">Log off</a></li>
+</ul>
+            }
+        }
+        else
+        {
+        <ul class="nav">
+            @*<li style="text-decoration:none" class="nav-item">
+                    <div style="display:flex;flex-direction:row;align-items:center" class="">
+                        <a href="@Url.Action("ShoppingList","Account")" id="shoppingListLink" class="nav-link tab-nav">
+                            Shopping List
+                            <img src="~/Images/shopping-cart.jpg" width="20px" height="20px">
+                        </a>
 
-   </ul>
-    }
-}
-else
-{
-<ul class="nav">
-    @*<li style="text-decoration:none" class="nav-item">
-            <div style="display:flex;flex-direction:row;align-items:center" class="">
-                <a href="@Url.Action("ShoppingList","Account")" id="shoppingListLink" class="nav-link tab-nav">
-                    Shopping List
-                    <img src="~/Images/shopping-cart.jpg" width="20px" height="20px">
-                </a>
-
-            </div>
-        </li>*@
+                    </div>
+                </li>*@
 
     <li style="text-decoration:none" class="nav-item nav-tab">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link tab-nav" })</li>
     <li style="text-decoration:none" class="nav-item nav-tab">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link tab-nav" })</li>

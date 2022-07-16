@@ -206,7 +206,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\no-image.bmp" />
     <Content Include="Images\logo.png" />
-    <Content Include="Images\shopping-cart.jpg" />
+    <Content Include="Images\rating-icon.png" />
+    <Content Include="Images\shopping-cart.png" />
     <Content Include="libman.json" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
