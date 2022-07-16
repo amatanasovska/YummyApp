@@ -5,12 +5,13 @@
 <link href="~/Content/page_style.css" rel="stylesheet" />
 <h1>Site Settings</h1>
 <div class="mt-5 container">
-    <div class="row my-3">
+    @if (User.IsInRole("Admin"))
+    {<div class="row my-3">
         <h3>Manage Users</h3>
     </div>
     <div class="row card-deck">
         <div class="custom-card card border-dark mb-3" id="addUserToRole" style="max-width: 18rem;">
-            <a class="text-reset text-decoration-none" href="@Url.Action("AddUserToRole","Account")">
+            <a class="text-reset text-decoration-none" href="@Url.Action("AddUserToRole", "Account")">
                 <div class="card-header font-weight-bold">Manage Users</div>
                 <div class="card-body text-dark">
 
@@ -20,7 +21,7 @@
             </a>
         </div>
         <div class="custom-card card border-dark mb-3" id="manageEditors" style="max-width: 18rem;">
-            <a class="text-reset text-decoration-none" href="@Url.Action("ManageEditors","Account")">
+            <a class="text-reset text-decoration-none" href="@Url.Action("ManageEditors", "Account")">
                 <div class="card-header font-weight-bold">Manage Users</div>
                 <div class="card-body text-dark">
                     <h5 class="card-title font-weight-bold">Manage Editors</h5>
@@ -28,7 +29,7 @@
                 </div>
             </a>
         </div>
-    </div>
+    </div>}
     <div class="row my-3">
         <h3>Manage Recipes</h3>
     </div>

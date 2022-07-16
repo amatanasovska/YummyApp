@@ -184,6 +184,10 @@
     <Compile Include="Migrations\202207152249419_Models_v1.designer.cs">
       <DependentUpon>202207152249419_Models_v1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207161329538_newMigration.cs" />
+    <Compile Include="Migrations\202207161329538_newMigration.designer.cs">
+      <DependentUpon>202207161329538_newMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -364,6 +368,7 @@
     <Content Include="Views\Account\SiteSettings.cshtml" />
     <Content Include="Views\Account\ManageEditors.cshtml" />
     <Content Include="Views\Account\ListRecipes.cshtml" />
+    <Content Include="Views\Account\AddNewRecipe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -385,6 +390,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207152249419_Models_v1.resx">
       <DependentUpon>202207152249419_Models_v1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207161329538_newMigration.resx">
+      <DependentUpon>202207161329538_newMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

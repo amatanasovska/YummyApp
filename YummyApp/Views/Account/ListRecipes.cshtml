@@ -1,7 +1,55 @@
-﻿
+﻿@using YummyApp.Models
+@model IEnumerable<Recipe>
 @{
     ViewBag.Title = "ListRecipes";
 }
 
-<h2>ListRecipes</h2>
+<h2>List of All Recipes</h2>
 
+@*<button class="btn btn-success my-3">Add new recipe</button>*@
+@Html.ActionLink("Add new recipe", "AddNewRecipe", new { }, new { @class = "btn btn-success my-3" })
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Recipe r in Model)
+        {
+            @*<div>@r.Title</div>
+                if (r.Reviews != null)
+                {
+                    <div>Non null</div>
+                    foreach (Review review in r.Reviews)
+                    {
+                        <div>review.Content</div>
+                    }
+                }
+                else
+                {
+                    <div>Null</div>
+                }*@
+            <tr>
+                <th scope="row">@r.Id</th>
+                <td>@r.Title</td>
+                @if (r.Description.Length > 50)
+                {
+                    <td>@r.Description.Substring(0, 50) ...</td>
+                }
+                else
+                {
+                    <td>@r.Description</td>
+                }
+                <td>
+                    <button class="btn btn-info">Details</button>
+                    <button class="btn btn-secondary">Edit</button>
+                    <button class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

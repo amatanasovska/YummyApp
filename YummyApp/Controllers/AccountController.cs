@@ -18,7 +18,7 @@ namespace YummyApp.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private ApplicationDbContext db = new ApplicationDbContext();
         public AccountController()
         {
         }
@@ -181,7 +181,7 @@ namespace YummyApp.Controllers
         public ActionResult AddUserToRole()
         {
             AddToRoleModel model = new AddToRoleModel();
-            model.roles = new List<string>() { "Admin", "Editor", "User" };
+            model.roles = new List<string>() { "Admin", "Editor", "StandardUser" };
             return View(model);
         }
         [HttpPost]
@@ -194,18 +194,33 @@ namespace YummyApp.Controllers
                 throw new HttpException(404, "There is no user with email: " + model.Email);
 
             UserManager.AddToRole(user.Id, model.selectedRole);
-            return RedirectToAction("Index", "Clients");
+            return RedirectToAction("Index", "Recipe");
         }
         [Authorize(Roles = "Admin")]
         public ActionResult ListRecipes()
         {
-            return View();
+            var recipes = db.Recipes.ToList();
+            return View(recipes);
         }
         [Authorize(Roles = "Admin")]
         public ActionResult ManageEditors()
         {
             return View();
         }
+        [Authorize(Roles = "Admin,Editor")]
+        public ActionResult AddNewRecipe()
+        {
+            return View(new Recipe() { Ingredients = new List<Ingredient>() }) ;
+        }
+        [Authorize(Roles = "Admin,Editor")]
+        public ActionResult CreateRecipe(Recipe model)
+        {
+            db.Recipes.Add(model);
+            db.SaveChanges();
+            return RedirectToAction("ListRecipes","Account");
+        }
+
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
