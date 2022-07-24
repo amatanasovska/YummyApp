@@ -28,9 +28,9 @@
             <div class="">
                 <!--<ul class="nav navbar-nav">-->
                 @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>*@
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>*@
                 @Html.Partial("_LoginPartial")
             </div>
 
@@ -43,23 +43,23 @@
                         <div class="col">
                             <form class="container">
                                 <div class="row">
-                                        <input class="form-control" style="margin:5px;display:inline-block;width:auto;" type="search" placeholder="Search" aria-label="Search">
-                                        <button class="btn btn-outline-success" type="submit">Search</button>
+                                    <input class="form-control" style="margin:5px;display:inline-block;width:auto;" type="search" placeholder="Search" aria-label="Search">
+                                    <button class="btn btn-outline-success" type="submit">Search</button>
 
                                 </div>
-                             </form>
+                            </form>
                         </div>
                     </div>
 
                 </div>
             </div>
-            
+
         </div>
-        
+
     </div>
 
-    
-    
+
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -69,6 +69,8 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

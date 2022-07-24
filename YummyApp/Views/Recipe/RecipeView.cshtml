@@ -1,0 +1,31 @@
+﻿@using YummyApp.Models
+@model Recipe
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="row">
+    <div class="col">
+        <h1>@Model.Title</h1>
+
+        @Html.DisplayFor(model => model.Description)
+        <br /><br />
+        <div>
+            Preparation time:
+            @Html.DisplayFor(model => model.PreparationTime) |
+            Servings:
+            @Html.DisplayFor(model => model.Servings)
+        </div>
+        <br />
+        <h3>Preparation:</h3>
+        @Html.Raw(HttpUtility.HtmlDecode(Model.Content));
+        
+        <br />
+        <br />
+
+        <i>Author: @Model.Author</i>
+    </div>
+    <div class="col">
+        <img width="500px" src="~/Images/no-image.bmp"/>
+    </div>
+</div>

@@ -4,9 +4,90 @@
 @{
     ViewBag.Title = "Yummy Recipes";
 }
+<link href="~/Content/page_style.css" rel="stylesheet" />
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner mb-3">
+        <div class="carousel-item active">
+            <div class="container-overlay">
+                <img src="~/Images/demo-image.jpg" class="d-block w-100 image-home" alt="...">
+                <div class="overlay">
+                    <div class="white-text text container ">
+                        <div class="row justify-content-center ">
+                            <h3 class="col-6 text-center text-wrap " style="font-size:1.5vw;">Recipe of the day</h3>
+                        </div>
+                        <div class="row justify-content-center">
+                            <p class="col-6 text-center text-wrap" style="font-size:1vw;">Our daily suggestion</p>
+                        </div>
+                        <hr />
+                        <div class="row justify-content-center">
+                            <h4 class="col text-center text-wrap " style="font-size:1.2vw;">Alfredo pizza</h4>
+                        </div>
+                        <div class="row justify-content-center mb-3">
+                            <h5 class="col text-center text-wrap " style="max-width:50%;font-size:1vw;">Unique taste and combination of chicken and buttery sauce of parmesan and cream.</h5>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="container-overlay">
+                <img src="~/Images/demo-image.jpg" class="d-block w-100 image-home" alt="...">
+                <div class="overlay">
+                    <div class="white-text text container ">
+                        <div class="row justify-content-center">
+                            <h3 class="col-6 text-center text-wrap" style="font-size:1.5vw;">Fresh Content!</h3>
+                        </div>
+                        <div class="row justify-content-center">
+                            <p class="col-6 text-center text-wrap" style="font-size:1vw;" >Check out the latest recipe carefully prepared by us.</p>
+                        </div>
+                        <hr />
+                        <div class="row justify-content-center">
+                            <h4 class="col text-center text-wrap " style="max-width:50%;font-size:1.2vw;">Alfredo pizza</h4>
+                        </div>
+                        <div class="row justify-content-center mb-3">
+                            <h5 class="col text-center text-wrap " style="max-width: 50%; font-size: 1vw;">Unique taste and combination of chicken and buttery sauce of parmesan and cream. Try it now trust us</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="container-overlay">
+                <img src="~/Images/demo-image.jpg" class="d-block w-100 image-home" alt="...">
+                <div class="overlay">
+                    <div class="white-text text container ">
+                        <div class="row justify-content-center">
+                            <h3 class="col-6 text-center text-wrap" style="font-size:1.5vw;">Our superstar!</h3>
+                        </div>
+                        <div class="row justify-content-center">
+                            <p class="col-6 text-center text-wrap" style="font-size:1vw;">See what you loved the most of our work.</p>
+                        </div>
+                        <hr />
+                        <div class="row justify-content-center">
+                            <h4 class="col text-center text-wrap " style="font-size:1.2vw;">Alfredo pizza</h4>
+                        </div>
+                        <div class="row justify-content-center mb-3">
+                            <h5 class="col text-center text-wrap " style="max-width:50%;font-size:1vw;">Unique taste and combination of chicken and buttery sauce of parmesan and cream.</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-target="#carouselExampleControls" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </button>
+</div>
+<h2 class="my-5">Most visited recipes</h2>
 <div class="row row-cols-2 row-cols-md-3">
     <!--<div class="card-columns">-->
+
     @foreach (Recipe r in Model)
     {
         <div class="col mb-4 ">
@@ -16,9 +97,16 @@
                     <h3>@r.Title</h3>
                     <p class="card-text">@r.Description</p>
                 </div>
+                <div class="row justify-content-center">
+                    <div class="col-6 my-3">
+                        @Html.ActionLink("Show Recipe", "RecipeView", new { id = r.Id }, new { @class = "btn btn-success w-100" })
+                    </div>
+                </div>
             </div>
         </div>
     }
+
 </div>
 
+@Html.ActionLink("Show All Recipes", "RecipeView", new { id = 0 }, new { @class = "btn btn-light w-100 col-2" })
 

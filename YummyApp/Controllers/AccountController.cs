@@ -210,12 +210,13 @@ namespace YummyApp.Controllers
         [Authorize(Roles = "Admin,Editor")]
         public ActionResult AddNewRecipe()
         {
-            return View(new Recipe() { Ingredients = new List<Ingredient>() }) ;
+            return View(new Recipe() { Ingredients = new List<Ingredient>(), Pictures = new List<Picture>() }) ;
         }
         [Authorize(Roles = "Admin,Editor")]
         public ActionResult CreateRecipe(Recipe model)
         {
             db.Recipes.Add(model);
+            model.Author = User.Identity.GetUserName();
             db.SaveChanges();
             return RedirectToAction("ListRecipes","Account");
         }

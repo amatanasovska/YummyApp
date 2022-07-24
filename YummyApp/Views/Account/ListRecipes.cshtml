@@ -44,11 +44,13 @@
                 {
                     <td>@r.Description</td>
                 }
-                <td>
-                    <button class="btn btn-info">Details</button>
-                    <button class="btn btn-secondary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
-                </td>
+             
+            <td>
+                @Html.ActionLink("Details", "RecipeView", "Recipe", new { Id = r.Id }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Edit", "RecipeEdit", "Recipe", new { Id = r.Id }, new { @class = "btn btn-secondary" })
+                @Html.ActionLink("Delete", "RecipeDelete", "Recipe", new { Id = r.Id }, new { @class = "btn btn-danger" })
+
+            </td>
             </tr>
         }
     </tbody>

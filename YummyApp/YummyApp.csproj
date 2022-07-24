@@ -188,11 +188,32 @@
     <Compile Include="Migrations\202207161329538_newMigration.designer.cs">
       <DependentUpon>202207161329538_newMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207161931543_LimitDescription.cs" />
+    <Compile Include="Migrations\202207161931543_LimitDescription.designer.cs">
+      <DependentUpon>202207161931543_LimitDescription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207242036581_author_name_per_recipe.cs" />
+    <Compile Include="Migrations\202207242036581_author_name_per_recipe.designer.cs">
+      <DependentUpon>202207242036581_author_name_per_recipe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207242041472_author_name_per_recipe_1.cs" />
+    <Compile Include="Migrations\202207242041472_author_name_per_recipe_1.designer.cs">
+      <DependentUpon>202207242041472_author_name_per_recipe_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207242048059_pictures_per_recipe.cs" />
+    <Compile Include="Migrations\202207242048059_pictures_per_recipe.designer.cs">
+      <DependentUpon>202207242048059_pictures_per_recipe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207242104501_validation_changes.cs" />
+    <Compile Include="Migrations\202207242104501_validation_changes.designer.cs">
+      <DependentUpon>202207242104501_validation_changes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -209,6 +230,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\demo-image.jpg" />
     <Content Include="Images\no-image.bmp" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\rating-icon.png" />
@@ -369,6 +391,9 @@
     <Content Include="Views\Account\ManageEditors.cshtml" />
     <Content Include="Views\Account\ListRecipes.cshtml" />
     <Content Include="Views\Account\AddNewRecipe.cshtml" />
+    <Content Include="Views\Recipe\RecipeView.cshtml" />
+    <Content Include="Views\Recipe\RecipeEdit.cshtml" />
+    <Content Include="Views\Recipe\RecipeDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -393,6 +418,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207161329538_newMigration.resx">
       <DependentUpon>202207161329538_newMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207161931543_LimitDescription.resx">
+      <DependentUpon>202207161931543_LimitDescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207242036581_author_name_per_recipe.resx">
+      <DependentUpon>202207242036581_author_name_per_recipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207242041472_author_name_per_recipe_1.resx">
+      <DependentUpon>202207242041472_author_name_per_recipe_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207242048059_pictures_per_recipe.resx">
+      <DependentUpon>202207242048059_pictures_per_recipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207242104501_validation_changes.resx">
+      <DependentUpon>202207242104501_validation_changes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

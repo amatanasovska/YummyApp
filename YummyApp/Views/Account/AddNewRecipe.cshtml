@@ -11,6 +11,7 @@
         @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            <br />
             @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -19,6 +20,7 @@
         @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            <br />
             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -28,6 +30,7 @@
         @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+            <br />
             @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -35,6 +38,7 @@
         @Html.LabelFor(model => model.PreparationTime, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.PreparationTime, new { htmlAttributes = new { @class = "form-control" } })
+            <br />
             @Html.ValidationMessageFor(model => model.PreparationTime, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -42,8 +46,9 @@
         @Html.LabelFor(model => model.Servings, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Servings, new { htmlAttributes = new { @class = "form-control" } })
+            <br />
             @Html.ValidationMessageFor(model => model.Servings, "", new { @class = "text-danger" })
         </div>
     </div>
-    <button type="submit">Create Recipe</button>
+    <button type="submit" class="btn btn-secondary">Create Recipe</button>
 }

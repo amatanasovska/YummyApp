@@ -8,3 +8,46 @@
     border-color:rgb(183, 178, 178)  !important;
 }
 
+.title-img-home
+{
+    background-color: rgba(0, 0, 0, 0.9)
+}
+.container-overlay {
+    position: relative;
+   /* width: 50%;*/
+}
+
+/*.image {
+    display: block;
+    width: 100%;
+    height: auto;
+}*/
+
+.overlay {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgb(32, 95, 13, 0.8);
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: .5s ease;
+}
+
+.container-overlay:hover .overlay {
+    top: 50%;
+    height: 50%;
+}
+
+.text {
+    white-space: nowrap;
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
