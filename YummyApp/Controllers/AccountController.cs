@@ -196,7 +196,7 @@ namespace YummyApp.Controllers
             UserManager.AddToRole(user.Id, model.selectedRole);
             return RedirectToAction("Index", "Recipe");
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Editor")]
         public ActionResult ListRecipes()
         {
             var recipes = db.Recipes.ToList();
@@ -205,7 +205,10 @@ namespace YummyApp.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult ManageEditors()
         {
-            return View();
+            List<ApplicationUser> users = (from u in db.Users
+        where u.Roles.Any(r => r.RoleId == "1")
+        select u).ToList();
+            return View(users);
         }
         [Authorize(Roles = "Admin,Editor")]
         public ActionResult AddNewRecipe()
@@ -221,6 +224,10 @@ namespace YummyApp.Controllers
             return RedirectToAction("ListRecipes","Account");
         }
 
+        public ActionResult ListEditorPosts(string Id)
+        {
+            return View(db.Recipes.Where(r => r.Author == db.Users.FirstOrDefault(u => u.Id == Id).UserName).ToList());
+        }
 
         //
         // GET: /Account/ConfirmEmail

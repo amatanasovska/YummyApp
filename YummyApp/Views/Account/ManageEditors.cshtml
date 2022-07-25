@@ -1,7 +1,33 @@
-﻿
+﻿@using YummyApp.Models
+@model IEnumerable<ApplicationUser>
 @{
-    ViewBag.Title = "ManageEditors";
+    ViewBag.Title = "Manage Editors";
 }
 
-<h2>ManageEditors</h2>
+<h2>Manage Editors</h2>
 
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Editor UserName</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ApplicationUser u in Model)
+        {
+            
+            <tr>
+                <th scope="row">@u.Id</th>
+                <td>@u.UserName</td>
+    
+                <td>
+                    @Html.ActionLink("See posts", "ListEditorPosts", "Account", new { Id = u.Id }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Remove editor", "RemoveEditorRole", "Account", new { Id = u.Id }, new { @class = "btn btn-danger" })
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
