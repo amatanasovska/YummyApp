@@ -272,11 +272,42 @@ namespace YummyApp.Controllers
         }
         public ActionResult ChooseDayRecipe(int Id)
         {
-            var recipe = db.Recipes.Where(x => x.Id == Id).Single();
+            var latestRecipe = db.DailyRecipes.OrderByDescending(x => x.ValidityDate).First();
+            var latestDate = latestRecipe.ValidityDate;
+            var isToday = true;
 
-            db.DailyRecipes.Add(new DailyRecipe() {RecipeId = recipe.Id, ValidityDate = DateTime.Now });
-            db.SaveChanges();
-            return RedirectToAction("SiteSettings", "Account");
+            var Editors = (from u in db.Users
+                           where u.Roles.Any(r => r.RoleId == "1" && r.RoleId != "0")
+                           select u).ToList();
+            var numberOfEditors = Editors.Count();
+            if (!latestDate.ToString("MM/dd/yyyy").Equals(DateTime.Now.ToString("MM/dd/yyyy")))
+            {
+                isToday = false;
+            }
+            if(User.IsInRole("Admin"))
+            {
+                var recipe = db.Recipes.Where(x => x.Id == Id).Single();
+
+                db.DailyRecipes.Add(new DailyRecipe() { RecipeId = recipe.Id, ValidityDate = DateTime.Now });
+                db.SaveChanges();
+                return RedirectToAction("SiteSettings", "Account");
+            }
+            else if (!isToday && User.Identity.GetUserId() == Editors.ElementAt((latestRecipe.Id + 1) % numberOfEditors).Id)
+            {
+                var recipe = db.Recipes.Where(x => x.Id == Id).Single();
+
+                db.DailyRecipes.Add(new DailyRecipe() { RecipeId = recipe.Id, ValidityDate = DateTime.Now });
+                db.SaveChanges();
+                return RedirectToAction("SiteSettings", "Account");
+            }
+            else if (User.Identity.GetUserId() != Editors.ElementAt((latestRecipe.Id + 1) % numberOfEditors).Id)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View("ErrorAlreadyDone");
+            }
         }
         //
         // GET: /Account/ConfirmEmail
