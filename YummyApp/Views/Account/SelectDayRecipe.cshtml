@@ -1,0 +1,39 @@
+﻿@using YummyApp.Models
+@model IEnumerable<Recipe>
+@{
+    ViewBag.Title = "ListRecipes";
+}
+
+<h2>List of All Recipes</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Recipe r in Model)
+        {
+            <tr>
+                <th scope="row">@r.Id</th>
+                <td>@r.Title</td>
+                @if (r.Description.Length > 50)
+                {
+                    <td>@r.Description.Substring(0, 50) ...</td>
+                }
+                else
+                {
+                    <td>@r.Description</td>
+                }
+             
+            <td>
+                @Html.ActionLink("Select", "ChooseDayRecipe", "Account", new { Id = r.Id }, new { @class = "btn btn-info" })
+            </td>
+            </tr>
+        }
+    </tbody>
+</table>

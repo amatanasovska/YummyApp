@@ -28,6 +28,7 @@ namespace YummyApp.Models
         public string Content { get; set; }
 
         [Required]
+        [Display(Name = "Preparation Time")]
         public string PreparationTime { get; set; }
         
        
@@ -38,5 +39,9 @@ namespace YummyApp.Models
 
         public List<Review> Reviews { get; set; }
         public string Author { get; set; }
+        [Display(Name="Publish recipe")]
+        public bool IsPublic { get; set; }
+
+        public DateTime Posted { get; set; }
     }
 }

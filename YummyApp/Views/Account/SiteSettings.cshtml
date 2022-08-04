@@ -1,4 +1,5 @@
-﻿
+﻿@using Microsoft.AspNet.Identity;
+@model YummyApp.Models.SiteSettingsViewModel
 @{
     ViewBag.Title = "SiteSettings";
 }
@@ -7,29 +8,29 @@
 <div class="mt-5 container">
     @if (User.IsInRole("Admin"))
     {<div class="row my-3">
-        <h3>Manage Users</h3>
-    </div>
-    <div class="row card-deck">
-        <div class="custom-card card border-dark mb-3" id="addUserToRole" style="max-width: 18rem;">
-            <a class="text-reset text-decoration-none" href="@Url.Action("AddUserToRole", "Account")">
-                <div class="card-header font-weight-bold">Manage Users</div>
-                <div class="card-body text-dark">
+            <h3>Manage Users</h3>
+        </div>
+        <div class="row card-deck">
+            <div class="custom-card card border-dark mb-3" id="addUserToRole" style="max-width: 18rem;">
+                <a class="text-reset text-decoration-none" href="@Url.Action("AddUserToRole", "Account")">
+                    <div class="card-header font-weight-bold">Manage Users</div>
+                    <div class="card-body text-dark">
 
-                    <h5 class="card-title font-weight-bold">Add User to Role</h5>
-                    <p class="card-text">Change and add roles to users. Possible roles: Admin, Editor and StandardUser</p>
-                </div>
-            </a>
-        </div>
-        <div class="custom-card card border-dark mb-3" id="manageEditors" style="max-width: 18rem;">
-            <a class="text-reset text-decoration-none" href="@Url.Action("ManageEditors", "Account")">
-                <div class="card-header font-weight-bold">Manage Users</div>
-                <div class="card-body text-dark">
-                    <h5 class="card-title font-weight-bold">Manage Editors</h5>
-                    <p class="card-text">See statistics for the work of the editors</p>
-                </div>
-            </a>
-        </div>
-    </div>}
+                        <h5 class="card-title font-weight-bold">Add User to Role</h5>
+                        <p class="card-text">Change and add roles to users. Possible roles: Admin, Editor and StandardUser</p>
+                    </div>
+                </a>
+            </div>
+            <div class="custom-card card border-dark mb-3" id="manageEditors" style="max-width: 18rem;">
+                <a class="text-reset text-decoration-none" href="@Url.Action("ManageEditors", "Account")">
+                    <div class="card-header font-weight-bold">Manage Users</div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title font-weight-bold">Manage Editors</h5>
+                        <p class="card-text">See statistics for the work of the editors</p>
+                    </div>
+                </a>
+            </div>
+        </div>}
     <div class="row my-3">
         <h3>Manage Recipes</h3>
     </div>
@@ -44,5 +45,20 @@
                 </div>
             </div>
         </a>
+
+        @if (User.IsInRole("Admin") || (User.IsInRole("Editor") && User.Identity.GetUserId() == Model.DayEditorId))
+        {
+            <a class="text-reset text-decoration-none" href="@Url.Action("SelectDayRecipe", "Account")">
+
+                <div class="custom-card card border-dark mb-3" id="listRecipes" style="max-width: 18rem;">
+                    <div class="card-header font-weight-bold">Manage Recipes</div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title font-weight-bold">Select recipe of the day</h5>
+                        <p class="card-text">Select which recipe will be shown as a recipe of the day on the home page.</p>
+                    </div>
+                </div>
+            </a>
+        }
     </div>
+
 </div>

@@ -208,14 +208,36 @@
     <Compile Include="Migrations\202207242104501_validation_changes.designer.cs">
       <DependentUpon>202207242104501_validation_changes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208041711293_property-visibility-recipe.cs" />
+    <Compile Include="Migrations\202208041711293_property-visibility-recipe.designer.cs">
+      <DependentUpon>202208041711293_property-visibility-recipe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208041734381_daily-recipes.cs" />
+    <Compile Include="Migrations\202208041734381_daily-recipes.designer.cs">
+      <DependentUpon>202208041734381_daily-recipes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208041736111_daily-recipes2.cs" />
+    <Compile Include="Migrations\202208041736111_daily-recipes2.designer.cs">
+      <DependentUpon>202208041736111_daily-recipes2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208041740507_daily-recipes-date.cs" />
+    <Compile Include="Migrations\202208041740507_daily-recipes-date.designer.cs">
+      <DependentUpon>202208041740507_daily-recipes-date.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208041756499_update-fields-dailyrecipe.cs" />
+    <Compile Include="Migrations\202208041756499_update-fields-dailyrecipe.designer.cs">
+      <DependentUpon>202208041756499_update-fields-dailyrecipe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DailyRecipe.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\Review.cs" />
+    <Compile Include="Models\SiteSettingsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -395,6 +417,7 @@
     <Content Include="Views\Recipe\RecipeEdit.cshtml" />
     <Content Include="Views\Recipe\RecipeDelete.cshtml" />
     <Content Include="Views\Account\ListEditorPosts.cshtml" />
+    <Content Include="Views\Account\SelectDayRecipe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -434,6 +457,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207242104501_validation_changes.resx">
       <DependentUpon>202207242104501_validation_changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208041711293_property-visibility-recipe.resx">
+      <DependentUpon>202208041711293_property-visibility-recipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208041734381_daily-recipes.resx">
+      <DependentUpon>202208041734381_daily-recipes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208041736111_daily-recipes2.resx">
+      <DependentUpon>202208041736111_daily-recipes2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208041740507_daily-recipes-date.resx">
+      <DependentUpon>202208041740507_daily-recipes-date.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208041756499_update-fields-dailyrecipe.resx">
+      <DependentUpon>202208041756499_update-fields-dailyrecipe.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

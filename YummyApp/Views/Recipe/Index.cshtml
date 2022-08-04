@@ -84,27 +84,32 @@
         <span class="sr-only">Next</span>
     </button>
 </div>
-<h2 class="my-5">Most visited recipes</h2>
+<h2 class="my-5">All recipes</h2>
 <div class="row row-cols-2 row-cols-md-3">
     <!--<div class="card-columns">-->
 
     @foreach (Recipe r in Model)
     {
-        <div class="col mb-4 ">
-            <div class="card h-100" style="width: 18rem;">
-                <img src="~/Images/no-image.bmp" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h3>@r.Title</h3>
-                    <p class="card-text">@r.Description</p>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-6 my-3">
-                        @Html.ActionLink("Show Recipe", "RecipeView", new { id = r.Id }, new { @class = "btn btn-success w-100" })
+        if (r.IsPublic)
+         {
+            <div class="col mb-4 ">
+
+                <div class="card h-100" style="width: 18rem;">
+                    <img src="~/Images/no-image.bmp" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h3>@r.Title</h3>
+                        <p class="card-text">@r.Description</p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-6 my-3">
+                            @Html.ActionLink("Show Recipe", "RecipeView", new { id = r.Id }, new { @class = "btn btn-success w-100" })
+                        </div>
                     </div>
                 </div>
+                
             </div>
-        </div>
-    }
+            }
+        }
 
 </div>
 

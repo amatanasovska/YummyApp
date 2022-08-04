@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using YummyApp.Models;
@@ -19,6 +20,7 @@ namespace YummyApp.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly UserManager<IdentityUser> _userManagerIU;
         public AccountController()
         {
         }
@@ -173,9 +175,21 @@ namespace YummyApp.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-        public ActionResult SiteSettings()
+        public async Task<ActionResult> SiteSettings()
         {
-            return View();
+            var latestRecipe = db.DailyRecipes.OrderByDescending(x => x.ValidityDate).First();
+            var latestDate = latestRecipe.ValidityDate;
+            var isToday = true;
+
+            var Editors = (from u in db.Users where u.Roles.Any(r => r.RoleId == "1" && r.RoleId!="0")
+                           select u).ToList();
+            var numberOfEditors = Editors.Count();
+            if (!latestDate.ToString("MM/dd/yyyy").Equals(DateTime.Now.ToString("MM/dd/yyyy")))
+            {
+                isToday = false;
+            }
+            SiteSettingsViewModel ssvm = new SiteSettingsViewModel() { isDayRecipeSet = isToday, DayEditorId = Editors.ElementAt((latestRecipe.Id+1)%numberOfEditors).Id};
+            return View(ssvm);
         }
         [Authorize(Roles = "Admin")]
         public ActionResult AddUserToRole()
@@ -199,7 +213,15 @@ namespace YummyApp.Controllers
         [Authorize(Roles = "Admin,Editor")]
         public ActionResult ListRecipes()
         {
-            var recipes = db.Recipes.ToList();
+            List<Recipe> recipes = null;
+             if(User.IsInRole("Editor"))
+            {   
+             recipes = db.Recipes.Where(x => x.Author.Equals(User.Identity.Name)).ToList();
+            } 
+             else if(User.IsInRole("Admin"))
+            {
+                recipes = db.Recipes.ToList();
+            }
             return View(recipes);
         }
         [Authorize(Roles = "Admin")]
@@ -228,7 +250,34 @@ namespace YummyApp.Controllers
         {
             return View(db.Recipes.Where(r => r.Author == db.Users.FirstOrDefault(u => u.Id == Id).UserName).ToList());
         }
+        public ActionResult RemoveEditorRole(string Id)
+        {
+            
+            UserManager.RemoveFromRole(Id, "Editor");
 
+            return RedirectToAction("ManageEditors");
+        }
+        public ActionResult SelectDayRecipe()
+        {
+            List<Recipe> recipes = null;
+            if (User.IsInRole("Editor"))
+            {
+                recipes = db.Recipes.Where(x => x.Author.Equals(User.Identity.Name)).ToList();
+            }
+            else if (User.IsInRole("Admin"))
+            {
+                recipes = db.Recipes.ToList();
+            }
+            return View(recipes);
+        }
+        public ActionResult ChooseDayRecipe(int Id)
+        {
+            var recipe = db.Recipes.Where(x => x.Id == Id).Single();
+
+            db.DailyRecipes.Add(new DailyRecipe() {RecipeId = recipe.Id, ValidityDate = DateTime.Now });
+            db.SaveChanges();
+            return RedirectToAction("SiteSettings", "Account");
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

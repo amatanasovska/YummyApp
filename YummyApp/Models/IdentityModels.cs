@@ -24,6 +24,8 @@ namespace YummyApp.Models
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Picture> Pictures { get; set; }
+        public DbSet<DailyRecipe> DailyRecipes { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
