@@ -1,0 +1,47 @@
+﻿@import url("font-awesome-4.7.0/css/font-awesome.css");
+
+
+.wrapper {
+    display: inline-block;
+    border: none;
+    font-size: 14px;
+}
+
+    .wrapper input {
+        border: 0;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+
+        opacity: 0;
+    }
+
+    .wrapper label {
+        position: relative;
+        float: right;
+        color: #C8C8C8;
+    }
+
+        .wrapper label:before {
+            margin: 5px;
+            content: "\f005";
+            font-family: 'FontAwesome';
+            display: inline-block;
+            font-size: 1.5em;
+            color: #ccc;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+    .wrapper input:checked ~ label:before {
+        color: #FFC107;
+    }
+
+    .wrapper label:hover ~ label:before {
+        color: #ffdb70;
+    }
+
+    .wrapper label:hover:before {
+        color: #FFC107;
+    }

@@ -1,5 +1,5 @@
 ﻿@using YummyApp.Models
-@model IEnumerable<Recipe>
+@model RecipeViewModel
 
 @{
     ViewBag.Title = "Yummy Recipes";
@@ -20,10 +20,10 @@
                         </div>
                         <hr />
                         <div class="row justify-content-center">
-                            <h4 class="col text-center text-wrap " style="font-size:1.2vw;">Alfredo pizza</h4>
+                            <h4 class="col text-center text-wrap " style="font-size:1.2vw;">@Model.RecipeOfTheDay.Title</h4>
                         </div>
                         <div class="row justify-content-center mb-3">
-                            <h5 class="col text-center text-wrap " style="max-width:50%;font-size:1vw;">Unique taste and combination of chicken and buttery sauce of parmesan and cream.</h5>
+                            <h5 class="col text-center text-wrap " style="max-width:50%;font-size:1vw;">@Model.RecipeOfTheDay.Description</h5>
                         </div>
 
                     </div>
@@ -43,10 +43,10 @@
                         </div>
                         <hr />
                         <div class="row justify-content-center">
-                            <h4 class="col text-center text-wrap " style="max-width:50%;font-size:1.2vw;">Alfredo pizza</h4>
+                            <h4 class="col text-center text-wrap " style="max-width:50%;font-size:1.2vw;">@Model.LatestRecipe.Title</h4>
                         </div>
                         <div class="row justify-content-center mb-3">
-                            <h5 class="col text-center text-wrap " style="max-width: 50%; font-size: 1vw;">Unique taste and combination of chicken and buttery sauce of parmesan and cream. Try it now trust us</h5>
+                            <h5 class="col text-center text-wrap " style="max-width: 50%; font-size: 1vw;">@Model.LatestRecipe.Description</h5>
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
 <div class="row row-cols-2 row-cols-md-3">
     <!--<div class="card-columns">-->
 
-    @foreach (Recipe r in Model)
+    @foreach (Recipe r in Model.Recipes)
     {
         if (r.IsPublic)
          {

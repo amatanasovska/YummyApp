@@ -235,7 +235,7 @@ namespace YummyApp.Controllers
         [Authorize(Roles = "Admin,Editor")]
         public ActionResult AddNewRecipe()
         {
-            return View(new Recipe() { Ingredients = new List<Ingredient>(), Pictures = new List<Picture>() }) ;
+            return View(new Recipe() {Reviews = new List<Review>(), Ingredients = new List<Ingredient>(), Pictures = new List<Picture>(),Posted = DateTime.Now }) ;
         }
         [Authorize(Roles = "Admin,Editor")]
         public ActionResult CreateRecipe(Recipe model)

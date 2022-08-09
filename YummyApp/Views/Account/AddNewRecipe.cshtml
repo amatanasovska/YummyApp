@@ -65,6 +65,9 @@
                     @Html.ValidationMessageFor(model => model.IsPublic, "", new { @class = "text-danger" })
                 </div>
             </div>
+            @Html.HiddenFor(model => model.Posted)
+            @Html.HiddenFor(model => model.Reviews)
+
             <button type="submit" class="btn btn-secondary">Create Recipe</button>
         </div>
         <div class="col">

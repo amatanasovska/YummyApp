@@ -11,5 +11,7 @@ namespace YummyApp.Models
         public string UserId { get; set; }
         public float Rating { get; set; }
         public string Content { get; set; }
+
+        public int RecipeId { get; set; }
     }
 }

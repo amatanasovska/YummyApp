@@ -1,31 +1,128 @@
 ﻿@using YummyApp.Models
-@model Recipe
+@using Microsoft.AspNet.Identity.Owin;
+@using Microsoft.AspNet.Identity;
+@model NewRecipeViewModel
 @{
-    ViewBag.Title = Model.Title;
+    ViewBag.Title = Model.Recipe.Title;
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div class="row">
-    <div class="col">
-        <h1>@Model.Title</h1>
+<link href="~/Content/stars.css" rel="stylesheet" />
+<div class="container">
+    <div class="row my-5">
+        <div class="col">
+            <h1>@Model.Recipe.Title</h1>
 
-        @Html.DisplayFor(model => model.Description)
-        <br /><br />
-        <div>
-            Preparation time:
-            @Html.DisplayFor(model => model.PreparationTime) |
-            Servings:
-            @Html.DisplayFor(model => model.Servings)
+            @Html.DisplayFor(model => model.Recipe.Description)
+            <br /><br />
+            <div>
+                Preparation time:
+                @Html.DisplayFor(model => model.Recipe.PreparationTime) |
+                Servings:
+                @Html.DisplayFor(model => model.Recipe.Servings)
+            </div>
+            <br />
+            <h3>Preparation:</h3>
+            @Html.Raw(HttpUtility.HtmlDecode(Model.Recipe.Content));
+
+            <br />
+            <br />
+
+            <i>Author: @Model.Recipe.Author</i>
+            @Html.HiddenFor(model => model.Recipe.Id);
         </div>
-        <br />
-        <h3>Preparation:</h3>
-        @Html.Raw(HttpUtility.HtmlDecode(Model.Content));
-        
-        <br />
-        <br />
-
-        <i>Author: @Model.Author</i>
+        <div class="col">
+            <img width="500px" src="~/Images/no-image.bmp" />
+        </div>
     </div>
-    <div class="col">
-        <img width="500px" src="~/Images/no-image.bmp"/>
+    <div class="row">
+        <div class="container">
+            <div class="row row-cols-2 row-cols-md-2">
+                @if (Model.Recipe.Reviews != null)
+                {
+                    foreach (Review r in Model.AllReviews)
+                    {
+                        var user = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(r.UserId).UserName;
+                        <div class="col mb-4 ">
+
+                            <div class="card h-100" style="width: 18rem;">
+                                <div class="card-body">
+                                    
+                                    @for (int i = 0; i < 5; i++)
+                                    {
+                                        if (i < r.Rating)
+                                        {
+                                            <span class="fa fa-star" style="color: orange;"></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="fa fa-star"></span>
+                                        }
+                                    }
+                                    <p class="card-text">@r.Content - @user</p>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                }
+            </div>
+            <br />
+            <div class="row">
+
+                <div class="col">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("CreateReview", "Recipe"))
+                        {
+                            @Html.HiddenFor(model => model.Recipe.Id);
+
+                            <div class="form-group">
+                                <label for="review">
+                                    <h4>Your review:</h4>
+                                </label>
+                                <br />
+
+                                <div class="wrapper">
+                                    @Html.RadioButtonFor(model => model.NewReview.Rating, 5, new { name = "ratingRadio", type = "radio", id = "st1", value = "5" })
+                                    <label for="st1"></label>
+                                    @Html.RadioButtonFor(model => model.NewReview.Rating, 4, new { name = "ratingRadio", type = "radio", id = "st2", value = "4" })
+                                    <label for="st2"></label>
+                                    @Html.RadioButtonFor(model => model.NewReview.Rating, 3, new { name = "ratingRadio", type = "radio", id = "st3", value = "3" })
+                                    <label for="st3"></label>
+                                    @Html.RadioButtonFor(model => model.NewReview.Rating, 2, new { name = "ratingRadio", type = "radio", id = "st4", value = "2" })
+                                    <label for="st4"></label>
+                                    @Html.RadioButtonFor(model => model.NewReview.Rating, 1, new { name = "ratingRadio", type = "radio", id = "st5", value = "1" })
+                                    <label for="st5"></label>
+
+                                    <!--<input name="ratingRadio" type="radio" id="st1" value="1" />
+                                    <label for="st1"></label>
+                                    <input name="ratingRadio" type="radio" id="st2" value="2" />
+                                    <label for="st2"></label>
+                                    <input name="ratingRadio" type="radio" id="st3" value="3" />
+                                    <label for="st3"></label>
+                                    <input name="ratingRadio" type="radio" id="st4" value="4" />
+                                    <label for="st4"></label>
+                                    <input name="ratingRadio" type="radio" id="st5" value="5" />-->
+                                </div>
+                                @Html.TextAreaFor(model => model.NewReview.Content, new { @class = "form-control", @style = "resize: both;width:100 %;min-height:200px!important;max-width: 500px;margin-right: 0;max-height: 900px;" })
+                                <input value="2" id="RecipeRating" name="RecipeRating" type="hidden">
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" value="CreateReview" class="btn btn-outline-success"> Add review</button>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="text-center">Please @Html.ActionLink("log in", "LogIn", "Account") to leave a review</div>
+                    }
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
+
