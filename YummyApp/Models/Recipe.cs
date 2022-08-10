@@ -45,9 +45,9 @@ namespace YummyApp.Models
         public DateTime Posted { get; set; }
         public float Average()
         {
-            if (Reviews == null)
+            if (Reviews == null || Reviews.Count==0)
             {
-                return 0.0f;
+                return (float)0.0;
             }
 
             var total = 0.0f;
@@ -60,8 +60,9 @@ namespace YummyApp.Models
                     
                 
                 total = total/Reviews.Count;
-                
-            return total;
+
+              return total;
+
         }
     }
 }

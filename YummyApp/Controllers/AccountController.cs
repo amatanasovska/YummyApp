@@ -216,11 +216,11 @@ namespace YummyApp.Controllers
             List<Recipe> recipes = null;
              if(User.IsInRole("Editor"))
             {   
-             recipes = db.Recipes.Where(x => x.Author.Equals(User.Identity.Name)).ToList();
+             recipes = db.Recipes.Include("Reviews").Where(x => x.Author.Equals(User.Identity.Name)).ToList();
             } 
              else if(User.IsInRole("Admin"))
             {
-                recipes = db.Recipes.ToList();
+                recipes = db.Recipes.Include("Reviews").ToList();
             }
             return View(recipes);
         }
