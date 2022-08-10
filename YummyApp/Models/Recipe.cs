@@ -20,7 +20,7 @@ namespace YummyApp.Models
         [MaxLength(100)]
         public string Description { get; set; }
 
-        
+
         public List<Ingredient> Ingredients { get; set; }
 
         [Required]
@@ -30,18 +30,38 @@ namespace YummyApp.Models
         [Required]
         [Display(Name = "Preparation Time")]
         public string PreparationTime { get; set; }
-        
-       
-        public List<Picture> Pictures   { get; set; }
-        
+
+        public Picture picture { get; set; }
+        public List<Picture> Pictures { get; set; }
+
         [Required]
         public int Servings { get; set; }
 
         public List<Review> Reviews { get; set; }
         public string Author { get; set; }
-        [Display(Name="Publish recipe")]
+        [Display(Name = "Publish recipe")]
         public bool IsPublic { get; set; }
 
         public DateTime Posted { get; set; }
+        public float Average()
+        {
+            if (Reviews == null)
+            {
+                return 0.0f;
+            }
+
+            var total = 0.0f;
+                
+                
+            foreach (Review review in Reviews)
+            {
+                total = total + review.Rating;
+            }
+                    
+                
+                total = total/Reviews.Count;
+                
+            return total;
+        }
     }
 }

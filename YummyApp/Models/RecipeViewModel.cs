@@ -10,7 +10,9 @@ namespace YummyApp.Models
     {
         public Recipe RecipeOfTheDay { get; set; }
         public Recipe LatestRecipe { get; set; }
+        public Recipe HighestRatingRecipe { get; set; }
         public IEnumerable<Recipe> Recipes { get; set; }
+
 
     }
 }

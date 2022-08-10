@@ -284,20 +284,14 @@ namespace YummyApp.Controllers
             {
                 isToday = false;
             }
-            if(User.IsInRole("Admin"))
+            if(User.IsInRole("Admin") || (!isToday && User.Identity.GetUserId() == Editors.ElementAt((latestRecipe.Id + 1) % numberOfEditors).Id))
             {
                 var recipe = db.Recipes.Where(x => x.Id == Id).Single();
-
-                db.DailyRecipes.Add(new DailyRecipe() { RecipeId = recipe.Id, ValidityDate = DateTime.Now });
-                db.SaveChanges();
-                return RedirectToAction("SiteSettings", "Account");
-            }
-            else if (!isToday && User.Identity.GetUserId() == Editors.ElementAt((latestRecipe.Id + 1) % numberOfEditors).Id)
-            {
-                var recipe = db.Recipes.Where(x => x.Id == Id).Single();
-
-                db.DailyRecipes.Add(new DailyRecipe() { RecipeId = recipe.Id, ValidityDate = DateTime.Now });
-                db.SaveChanges();
+                if (recipe.IsPublic)
+                {
+                    db.DailyRecipes.Add(new DailyRecipe() { RecipeId = recipe.Id, ValidityDate = DateTime.Now });
+                    db.SaveChanges();
+                }
                 return RedirectToAction("SiteSettings", "Account");
             }
             else if (User.Identity.GetUserId() != Editors.ElementAt((latestRecipe.Id + 1) % numberOfEditors).Id)

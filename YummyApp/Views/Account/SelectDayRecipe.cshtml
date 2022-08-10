@@ -18,7 +18,9 @@
     <tbody>
         @foreach (Recipe r in Model)
         {
-            <tr>
+            if (r.IsPublic)
+            { 
+                <tr>
                 <th scope="row">@r.Id</th>
                 <td>@r.Title</td>
                 @if (r.Description.Length > 50)
@@ -34,6 +36,7 @@
                 @Html.ActionLink("Select", "ChooseDayRecipe", "Account", new { Id = r.Id }, new { @class = "btn btn-info" })
             </td>
             </tr>
+            }
         }
     </tbody>
 </table>

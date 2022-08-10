@@ -232,6 +232,14 @@
     <Compile Include="Migrations\202208092148138_review-change.designer.cs">
       <DependentUpon>202208092148138_review-change.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208092342337_main-picture-recipe.cs" />
+    <Compile Include="Migrations\202208092342337_main-picture-recipe.designer.cs">
+      <DependentUpon>202208092342337_main-picture-recipe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208102118136_user-reviews.cs" />
+    <Compile Include="Migrations\202208102118136_user-reviews.designer.cs">
+      <DependentUpon>202208102118136_user-reviews.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DailyRecipe.cs" />
@@ -520,6 +528,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208092148138_review-change.resx">
       <DependentUpon>202208092148138_review-change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208092342337_main-picture-recipe.resx">
+      <DependentUpon>202208092342337_main-picture-recipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208102118136_user-reviews.resx">
+      <DependentUpon>202208102118136_user-reviews.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
