@@ -1,0 +1,63 @@
+﻿@using YummyApp.Models
+@model UserReviewViewModel
+@{
+    ViewBag.Title = "Your Reviews";
+}
+
+<h2>List of All Your Reviews</h2>
+
+@*<button class="btn btn-success my-3">Add new recipe</button>*@
+@{ 
+    ApplicationDbContext db = new ApplicationDbContext();
+}
+<table id="reviews" class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Recipe Title</th>
+            <th scope="col">Content</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (string r in Model.Reviews.Keys)
+        {
+            @*<div>@r.Title</div>
+                if (r.Reviews != null)
+                {
+                    <div>Non null</div>
+                    foreach (Review review in r.Reviews)
+                    {
+                        <div>review.Content</div>
+                    }
+                }
+                else
+                {
+                    <div>Null</div>
+                }*@
+        <tr>
+            @{
+                Review review = Model.Reviews[r];
+            }
+            <th scope="row">#</th>
+            <td>@r</td>
+            <td>@review.Content</td>
+
+            <td>@review.Rating</td>
+            <td>
+                @Html.ActionLink("See Recipe", "RecipeView", "Recipe", new { Id = review.RecipeId }, new { @class = "btn btn-info" })
+
+
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+@section Scripts{
+<script>
+    $(document).ready(function () {
+        $("#reviews").DataTable();
+    });
+    </script>    
+}

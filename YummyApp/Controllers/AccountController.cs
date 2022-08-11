@@ -303,6 +303,18 @@ namespace YummyApp.Controllers
                 return View("ErrorAlreadyDone");
             }
         }
+        public ActionResult UserReviews()
+        {
+            Dictionary<string, Review> dictionary = new Dictionary<string, Review>();
+            var userId = User.Identity.GetUserId();
+            var reviews = db.Reviews.Where(r => r.UserId.Equals(userId)).ToList();
+            foreach(Review r in reviews)
+            {
+                var recipeName = db.Recipes.Find(r.RecipeId).Title;
+                dictionary[recipeName] = r;
+            }
+            return View(new UserReviewViewModel() { Reviews = dictionary });
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

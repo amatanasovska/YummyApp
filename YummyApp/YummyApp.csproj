@@ -252,6 +252,7 @@
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\SiteSettingsViewModel.cs" />
+    <Compile Include="Models\UserReviewViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -644,6 +645,7 @@
     <Content Include="Views\Account\ListEditorPosts.cshtml" />
     <Content Include="Views\Account\SelectDayRecipe.cshtml" />
     <Content Include="Views\Account\ErrorAlreadyDone.cshtml" />
+    <Content Include="Views\Account\UserReviews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

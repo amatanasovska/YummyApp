@@ -18,8 +18,8 @@
     <li class="nav-item dropdown nav-tab">
         <a class="nav-link dropdown-toggle tab-nav" id="accountLink" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Account</a>
         <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Saved recipes</a>
-            <a class="dropdown-item" href="#">My ratings</a>
+            <a class="dropdown-item" href="@Url.Action("SavedRecipes","Account")">Saved recipes</a>
+            <a class="dropdown-item" href="@Url.Action("UserReviews","Account")">My ratings</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="@Url.Action("Index","Manage")">Account settings</a>
             @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
