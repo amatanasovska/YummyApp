@@ -10,7 +10,7 @@
         <div class="carousel-item active">
             <div class="container-overlay">
                 <a href="@Url.Action("RecipeView",new {Id=Model.RecipeOfTheDay.Id})">
-                    <img src="~/Images/demo-image.jpg" class="d-block w-100 image-home" alt="...">
+                    <img src="@Model.RecipeOfTheDay.file" class="d-block w-100 image-home" alt="..." style="height:800px">
                 </a>
                     <div class="overlay">
 
@@ -36,7 +36,7 @@
         <div class="carousel-item">
             <div class="container-overlay">
                 <a href="@Url.Action("RecipeView",new {Id=Model.LatestRecipe.Id})">
-                    <img src="~/Images/demo-image.jpg" class="d-block w-100 image-home" alt="...">
+                    <img src="@Model.LatestRecipe.file" class="d-block w-100 image-home" alt="..." style="height:800px">
                 </a>
                     <div class="overlay">
 
@@ -62,7 +62,7 @@
         <div class="carousel-item">
             <div class="container-overlay">
                 <a href="@Url.Action("RecipeView",new {Id=Model.HighestRatingRecipe.Id})">
-                    <img src="~/Images/demo-image.jpg" class="d-block w-100 image-home" alt="...">
+                    <img src="@Model.HighestRatingRecipe.file" class="d-block w-100 image-home" alt="..." style="height:800px">
                 </a>
                     <div class="overlay">
 
@@ -107,7 +107,7 @@
             <div class="col mb-4 ">
 
                 <div class="card h-100" style="width: 18rem;">
-                    <img src="~/Images/no-image.bmp" class="card-img-top" alt="...">
+                    <img src="@r.file" class="card-img-top" alt="..." style="height:250px">
                     <div class="card-body">
                         <h3>@r.Title</h3>
                         <p class="card-text">@r.Description</p>

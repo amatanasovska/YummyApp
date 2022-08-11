@@ -240,6 +240,14 @@
     <Compile Include="Migrations\202208102118136_user-reviews.designer.cs">
       <DependentUpon>202208102118136_user-reviews.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208110014228_recipe-image-upload.cs" />
+    <Compile Include="Migrations\202208110014228_recipe-image-upload.designer.cs">
+      <DependentUpon>202208110014228_recipe-image-upload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208110039270_recipe-image-upload-change.cs" />
+    <Compile Include="Migrations\202208110039270_recipe-image-upload-change.designer.cs">
+      <DependentUpon>202208110039270_recipe-image-upload-change.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DailyRecipe.cs" />
@@ -646,6 +654,7 @@
     <Content Include="Views\Account\SelectDayRecipe.cshtml" />
     <Content Include="Views\Account\ErrorAlreadyDone.cshtml" />
     <Content Include="Views\Account\UserReviews.cshtml" />
+    <Content Include="Views\Account\UploadRecipeImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -709,6 +718,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208102118136_user-reviews.resx">
       <DependentUpon>202208102118136_user-reviews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208110014228_recipe-image-upload.resx">
+      <DependentUpon>202208110014228_recipe-image-upload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208110039270_recipe-image-upload-change.resx">
+      <DependentUpon>202208110039270_recipe-image-upload-change.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

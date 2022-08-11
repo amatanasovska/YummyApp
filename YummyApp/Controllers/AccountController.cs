@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -242,10 +243,39 @@ namespace YummyApp.Controllers
         {
             db.Recipes.Add(model);
             model.Author = User.Identity.GetUserName();
+            model.file = "/Images/no-image.bmp";
             db.SaveChanges();
-            return RedirectToAction("ListRecipes","Account");
+            return View("UploadRecipeImage", model);
         }
+        public ActionResult UploadRecipeImage(Recipe recipe)
+        {
+            return View(recipe);
+        }
+        [HttpPost]
+        public ActionResult UploadFiles(Recipe model,HttpPostedFileBase file)
+        {
+            
+                try
+                {
 
+                    //Method 2 Get file details from HttpPostedFileBase class    
+
+                    if (file != null)
+                    {
+                        string path = Path.Combine(Server.MapPath("/Images"), model.Id+"-main"+Path.GetExtension(file.FileName));
+                        file.SaveAs(path);
+                    }
+                    db.Recipes.Find(model.Id).file = "/Images/" + model.Id + "-main"+Path.GetExtension(file.FileName);
+                    db.SaveChanges();
+                    ViewBag.FileStatus = "File uploaded successfully.";
+                }
+                catch (Exception)
+                {
+                    ViewBag.FileStatus = "Error while file uploading."; ;
+                }
+            
+            return View("UploadRecipeImage",model);
+        }
         public ActionResult ListEditorPosts(string Id)
         {
             return View(db.Recipes.Where(r => r.Author == db.Users.FirstOrDefault(u => u.Id == Id).UserName).ToList());

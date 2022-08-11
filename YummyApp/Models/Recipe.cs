@@ -42,6 +42,9 @@ namespace YummyApp.Models
         [Display(Name = "Publish recipe")]
         public bool IsPublic { get; set; }
 
+        [DataType(DataType.Upload)]
+        [Display(Name = "Upload File")]
+        public string file { get; set; }
         public DateTime Posted { get; set; }
         public float Average()
         {

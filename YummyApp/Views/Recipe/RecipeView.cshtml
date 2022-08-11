@@ -32,7 +32,7 @@
             @Html.HiddenFor(model => model.Recipe.Id);
         </div>
         <div class="col">
-            <img width="500px" src="~/Images/no-image.bmp" />
+            <img width="500px" src="@Model.Recipe.file" />
         </div>
     </div>
     <div class="row">
