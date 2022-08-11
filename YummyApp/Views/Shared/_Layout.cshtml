@@ -27,32 +27,33 @@
             <div class="">
                 <!--<ul class="nav navbar-nav">-->
                 @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>*@
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>*@
                 @Html.Partial("_LoginPartial")
             </div>
+            @using (Html.BeginForm("SearchRecipe", "Recipe"))
+            { 
+                <div class="collapse navbar-collapse" id="searchField">
+                    <div class="container-fluid" style="margin:20px">
+                        <div class="row" style="width:100%">
+                            <div class="col">
+                                Search for keywords, ingredients, tags:
+                            </div>
+                            <div class="col">
+                                <form class="container">
+                                    <div class="row">
+                                        <input name="model" class="form-control" style="margin:5px;display:inline-block;width:auto;" type="search" placeholder="Search" aria-label="Search">
+                                        <button class="btn btn-outline-success" type="submit">Search</button>
 
-            <div class="collapse navbar-collapse" id="searchField">
-                <div class="container-fluid" style="margin:20px">
-                    <div class="row" style="width:100%">
-                        <div class="col">
-                            Search for keywords, ingredients, tags:
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div class="col">
-                            <form class="container">
-                                <div class="row">
-                                    <input class="form-control" style="margin:5px;display:inline-block;width:auto;" type="search" placeholder="Search" aria-label="Search">
-                                    <button class="btn btn-outline-success" type="submit">Search</button>
 
-                                </div>
-                            </form>
-                        </div>
                     </div>
-
                 </div>
-            </div>
-
+            }
         </div>
 
     </div>

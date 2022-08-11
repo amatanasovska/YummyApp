@@ -1,0 +1,44 @@
+﻿@using YummyApp.Models
+@using Microsoft.AspNet.Identity;
+
+@model IEnumerable<Recipe>
+@{
+    ViewBag.Title = "Search results";
+}
+
+<h2>Recipes that match your search criteria</h2>
+
+<div class="row row-cols-2 row-cols-md-3">
+    <!--<div class="card-columns">-->
+
+    @foreach (Recipe r in Model)
+    {
+        if (r.IsPublic)
+        {
+            <div class="col mb-4 ">
+
+                <div class="card h-100" style="width: 18rem;">
+                    <img src="@r.file" class="card-img-top" alt="..." style="height:250px">
+                    <div class="card-body">
+                        <h3>@r.Title</h3>
+                        <p class="card-text">@r.Description</p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-6 my-3">
+                            @Html.ActionLink("Show Recipe", "RecipeView", "Recipe", new { id = r.Id }, new { @class = "btn btn-success w-100" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+    }
+
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#reviews").DataTable();
+        });
+    </script>
+}

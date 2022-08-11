@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using YummyApp.Models;
@@ -154,6 +155,20 @@ namespace YummyApp.Controllers
             else
             {
                 return HttpNotFound();
+            }
+        }
+   
+        public ActionResult SearchRecipe(string model)
+        {
+            var Recipes = db.Recipes.ToList();
+            if (model == "" || model == null)
+            {
+                return View(Recipes);
+            }
+            else
+            {
+                var result = Recipes.Where(n => Regex.IsMatch(n.Title, Regex.Escape(model), RegexOptions.IgnoreCase) || Regex.IsMatch(n.Description, Regex.Escape(model), RegexOptions.IgnoreCase)).ToList();
+                return View(result);
             }
         }
     }
