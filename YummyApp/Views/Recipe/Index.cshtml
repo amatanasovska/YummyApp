@@ -10,7 +10,7 @@
     <div class="carousel-inner mb-3">
         <div class="carousel-item active">
             <div class="container-overlay">
-                <a href="@Url.Action("RecipeView",new {Id=Model.RecipeOfTheDay.Id})">
+                <a href="@Url.Action("RecipeView", new { Id = Model.RecipeOfTheDay.Id })">
                     <img src="@Model.RecipeOfTheDay.file" class="d-block w-100 image-home" alt="..." style="height:800px">
                 </a>
                 <div class="overlay">
@@ -36,7 +36,7 @@
         </div>
         <div class="carousel-item">
             <div class="container-overlay">
-                <a href="@Url.Action("RecipeView",new {Id=Model.LatestRecipe.Id})">
+                <a href="@Url.Action("RecipeView", new { Id = Model.LatestRecipe.Id })">
                     <img src="@Model.LatestRecipe.file" class="d-block w-100 image-home" alt="..." style="height:800px">
                 </a>
                 <div class="overlay">
@@ -62,7 +62,7 @@
         </div>
         <div class="carousel-item">
             <div class="container-overlay">
-                <a href="@Url.Action("RecipeView",new {Id=Model.HighestRatingRecipe.Id})">
+                <a href="@Url.Action("RecipeView", new { Id = Model.HighestRatingRecipe.Id })">
                     <img src="@Model.HighestRatingRecipe.file" class="d-block w-100 image-home" alt="..." style="height:800px">
                 </a>
                 <div class="overlay">
@@ -128,5 +128,7 @@
 
 </div>
 
-@Html.ActionLink("Show All Recipes", "RecipeView", new { id = 0 }, new { @class = "btn btn-light w-100 col-2" })
+@{
+ //   Html.ActionLink("Show All Recipes", "RecipeView", new { id = 0 }, new { @class = "btn btn-light w-100 col-2" })
+}
 

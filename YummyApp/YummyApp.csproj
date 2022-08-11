@@ -248,6 +248,22 @@
     <Compile Include="Migrations\202208110039270_recipe-image-upload-change.designer.cs">
       <DependentUpon>202208110039270_recipe-image-upload-change.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208111916319_saved-recipes-impl.cs" />
+    <Compile Include="Migrations\202208111916319_saved-recipes-impl.designer.cs">
+      <DependentUpon>202208111916319_saved-recipes-impl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208112018370_saved-recipe-impl2.cs" />
+    <Compile Include="Migrations\202208112018370_saved-recipe-impl2.designer.cs">
+      <DependentUpon>202208112018370_saved-recipe-impl2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208112026231_saved-recipe-impl3.cs" />
+    <Compile Include="Migrations\202208112026231_saved-recipe-impl3.designer.cs">
+      <DependentUpon>202208112026231_saved-recipe-impl3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208112037335_saved-recipe-impl4.cs" />
+    <Compile Include="Migrations\202208112037335_saved-recipe-impl4.designer.cs">
+      <DependentUpon>202208112037335_saved-recipe-impl4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DailyRecipe.cs" />
@@ -259,6 +275,7 @@
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\Review.cs" />
+    <Compile Include="Models\SavedRecipeUser.cs" />
     <Compile Include="Models\SiteSettingsViewModel.cs" />
     <Compile Include="Models\UserReviewViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -655,6 +672,7 @@
     <Content Include="Views\Account\ErrorAlreadyDone.cshtml" />
     <Content Include="Views\Account\UserReviews.cshtml" />
     <Content Include="Views\Account\UploadRecipeImage.cshtml" />
+    <Content Include="Views\Account\SavedRecipes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -724,6 +742,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208110039270_recipe-image-upload-change.resx">
       <DependentUpon>202208110039270_recipe-image-upload-change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208111916319_saved-recipes-impl.resx">
+      <DependentUpon>202208111916319_saved-recipes-impl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208112018370_saved-recipe-impl2.resx">
+      <DependentUpon>202208112018370_saved-recipe-impl2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208112026231_saved-recipe-impl3.resx">
+      <DependentUpon>202208112026231_saved-recipe-impl3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208112037335_saved-recipe-impl4.resx">
+      <DependentUpon>202208112037335_saved-recipe-impl4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

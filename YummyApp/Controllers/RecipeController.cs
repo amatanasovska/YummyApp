@@ -51,9 +51,16 @@ namespace YummyApp.Controllers
         {
             var reviews = db.Reviews.Where(x => x.RecipeId == Id).ToList();
             var recipe = db.Recipes.Find(Id);
+            var userId = User.Identity.GetUserId();
+            var savedEntry = db.SavedRecipeUser.Where(x => x.RecipeId.Equals(Id) && x.UserId.Equals(userId)).ToList();
+            bool saved = true;
+            if(savedEntry.Count==0)
+            {
+                saved = false;
+            }
             if (recipe.IsPublic || (recipe.Author==User.Identity.GetUserId() && User.IsInRole("Editor")) || User.IsInRole("Admin"))
             {
-                return View(new NewRecipeViewModel() { Recipe = recipe, NewReview = new Review(), AllReviews = reviews });
+                return View(new NewRecipeViewModel() { Recipe = recipe, NewReview = new Review(), AllReviews = reviews ,isSaved = saved});
             }
             else
             {
@@ -81,11 +88,36 @@ namespace YummyApp.Controllers
             return RedirectToAction("ListRecipes", "Account");
         }
         [Authorize]
+        public ActionResult RemoveSavedRecipe( int Id, string UserId)
+        {
+
+            SavedRecipeUser recipeuser = db.SavedRecipeUser.Where(r => r.RecipeId==Id && r.UserId.Equals(UserId)).First();
+            db.SavedRecipeUser.Remove(recipeuser);
+            db.SaveChanges();
+            return RedirectToAction("SavedRecipes", "Account");
+        }
+        [Authorize]
         public ActionResult EditRecipe(Recipe model)
         {
             db.Entry(model).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("ListRecipes", "Account");
+        }
+        [Authorize]
+        public ActionResult SaveRecipe(int recipeId)
+        {
+
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.Where(u => u.Id == userId).FirstOrDefault();
+            var recipe = db.Recipes.Find(recipeId);
+            if(db.SavedRecipeUser.Where(r => r.RecipeId==recipeId && r.UserId.Equals(userId)).Count()!=0)
+            {
+                return RedirectToAction("RecipeView", recipe);
+            }
+            db.SavedRecipeUser.Add(new SavedRecipeUser() { RecipeId = recipeId, UserId = userId});
+            
+            db.SaveChanges();
+            return RedirectToAction("RecipeView", recipe);
         }
         [Authorize]
         public ActionResult CreateReview(NewRecipeViewModel model)

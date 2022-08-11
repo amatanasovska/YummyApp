@@ -11,6 +11,16 @@
 <div class="container">
     <div class="row my-5">
         <div class="col">
+            @if (!User.Identity.IsAuthenticated || !Model.isSaved)
+            {
+                @Html.ActionLink("Save this recipe", "SaveRecipe", new { recipeId = Model.Recipe.Id });
+
+            }
+            else
+            {
+                <div>You already saved this recipe!</div>
+
+            }
             <h1>@Model.Recipe.Title</h1>
 
             @Html.DisplayFor(model => model.Recipe.Description)

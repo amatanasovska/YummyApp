@@ -155,7 +155,7 @@ namespace YummyApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -176,6 +176,7 @@ namespace YummyApp.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+        
         public async Task<ActionResult> SiteSettings()
         {
             var latestRecipe = db.DailyRecipes.OrderByDescending(x => x.ValidityDate).First();
@@ -225,6 +226,7 @@ namespace YummyApp.Controllers
             }
             return View(recipes);
         }
+
         [Authorize(Roles = "Admin")]
         public ActionResult ManageEditors()
         {
@@ -246,6 +248,19 @@ namespace YummyApp.Controllers
             model.file = "/Images/no-image.bmp";
             db.SaveChanges();
             return View("UploadRecipeImage", model);
+        }
+        [Authorize]
+        public ActionResult SavedRecipes()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.Where(u => u.Id == userId).FirstOrDefault();
+            var SavedRecipeUser = db.SavedRecipeUser.Where(u => u.UserId.Equals(userId)).ToList();
+            var SavedRecipes = new List<Recipe>();
+            foreach(SavedRecipeUser s in SavedRecipeUser)
+            {
+                SavedRecipes.Add(db.Recipes.Find(s.RecipeId));
+            }
+            return View(SavedRecipes); 
         }
         public ActionResult UploadRecipeImage(Recipe recipe)
         {

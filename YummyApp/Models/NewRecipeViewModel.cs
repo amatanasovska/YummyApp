@@ -13,5 +13,7 @@ namespace YummyApp.Models
         public Review NewReview { get; set; }
 
         public List<Review> AllReviews { get; set; }
+
+        public Boolean isSaved { get; set; }
     }
 }
