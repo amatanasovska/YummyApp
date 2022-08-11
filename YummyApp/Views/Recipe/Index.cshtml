@@ -1,5 +1,6 @@
 ﻿@using YummyApp.Models
 @model RecipeViewModel
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 @{
     ViewBag.Title = "Yummy Recipes";
@@ -12,24 +13,24 @@
                 <a href="@Url.Action("RecipeView",new {Id=Model.RecipeOfTheDay.Id})">
                     <img src="@Model.RecipeOfTheDay.file" class="d-block w-100 image-home" alt="..." style="height:800px">
                 </a>
-                    <div class="overlay">
+                <div class="overlay">
 
-                        <div class="white-text text container ">
-                            <div class="row justify-content-center ">
-                                <h3 class="col-6 text-center text-wrap " style="font-size:1.5vw;">Recipe of the day</h3>
-                            </div>
-                            <div class="row justify-content-center">
-                                <p class="col-6 text-center text-wrap" style="font-size:1vw;">Our daily suggestion</p>
-                            </div>
-                            <hr />
-                            <div class="row justify-content-center">
-                                <h4 class="col text-center text-wrap " style="font-size:1.2vw;">@Model.RecipeOfTheDay.Title</h4>
-                            </div>
-                            <div class="row justify-content-center mb-3">
-                                <h5 class="col text-center text-wrap " style="max-width:50%;font-size:1vw;">@Model.RecipeOfTheDay.Description</h5>
-                            </div>
-                
-            </div>
+                    <div class="white-text text container ">
+                        <div class="row justify-content-center ">
+                            <h3 class="col-6 text-center text-wrap " style="font-size:1.5vw;">Recipe of the day</h3>
+                        </div>
+                        <div class="row justify-content-center">
+                            <p class="col-6 text-center text-wrap" style="font-size:1vw;">Our daily suggestion</p>
+                        </div>
+                        <hr />
+                        <div class="row justify-content-center">
+                            <h4 class="col text-center text-wrap " style="font-size:1.2vw;">@Model.RecipeOfTheDay.Title</h4>
+                        </div>
+                        <div class="row justify-content-center mb-3">
+                            <h5 class="col text-center text-wrap " style="max-width:50%;font-size:1vw;">@Model.RecipeOfTheDay.Description</h5>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,24 +39,24 @@
                 <a href="@Url.Action("RecipeView",new {Id=Model.LatestRecipe.Id})">
                     <img src="@Model.LatestRecipe.file" class="d-block w-100 image-home" alt="..." style="height:800px">
                 </a>
-                    <div class="overlay">
+                <div class="overlay">
 
-                        <div class="white-text text container ">
-                            <div class="row justify-content-center">
-                                <h3 class="col-6 text-center text-wrap" style="font-size:1.5vw;">Fresh Content!</h3>
-                            </div>
-                            <div class="row justify-content-center">
-                                <p class="col-6 text-center text-wrap" style="font-size:1vw;">Check out the latest recipe carefully prepared by us.</p>
-                            </div>
-                            <hr />
-                            <div class="row justify-content-center">
-                                <h4 class="col text-center text-wrap " style="max-width:50%;font-size:1.2vw;">@Model.LatestRecipe.Title</h4>
-                            </div>
-                            <div class="row justify-content-center mb-3">
-                                <h5 class="col text-center text-wrap " style="max-width: 50%; font-size: 1vw;">@Model.LatestRecipe.Description</h5>
-                            </div>
+                    <div class="white-text text container ">
+                        <div class="row justify-content-center">
+                            <h3 class="col-6 text-center text-wrap" style="font-size:1.5vw;">Fresh Content!</h3>
                         </div>
-                
+                        <div class="row justify-content-center">
+                            <p class="col-6 text-center text-wrap" style="font-size:1vw;">Check out the latest recipe carefully prepared by us.</p>
+                        </div>
+                        <hr />
+                        <div class="row justify-content-center">
+                            <h4 class="col text-center text-wrap " style="max-width:50%;font-size:1.2vw;">@Model.LatestRecipe.Title</h4>
+                        </div>
+                        <div class="row justify-content-center mb-3">
+                            <h5 class="col text-center text-wrap " style="max-width: 50%; font-size: 1vw;">@Model.LatestRecipe.Description</h5>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -64,25 +65,25 @@
                 <a href="@Url.Action("RecipeView",new {Id=Model.HighestRatingRecipe.Id})">
                     <img src="@Model.HighestRatingRecipe.file" class="d-block w-100 image-home" alt="..." style="height:800px">
                 </a>
-                    <div class="overlay">
+                <div class="overlay">
 
 
-                        <div class="white-text text container ">
-                            <div class="row justify-content-center">
-                                <h3 class="col-6 text-center text-wrap" style="font-size:1.5vw;">Our superstar!</h3>
-                            </div>
-                            <div class="row justify-content-center">
-                                <p class="col-6 text-center text-wrap" style="font-size:1vw;">See what you loved the most of our work.</p>
-                            </div>
-                            <hr />
-                            <div class="row justify-content-center">
-                                <h4 class="col text-center text-wrap " style="font-size:1.2vw;">@Model.HighestRatingRecipe.Title</h4>
-                            </div>
-                            <div class="row justify-content-center mb-3">
-                                <h5 class="col text-center text-wrap " style="max-width:50%;font-size:1vw;">@Model.HighestRatingRecipe.Description</h5>
-                            </div>
+                    <div class="white-text text container ">
+                        <div class="row justify-content-center">
+                            <h3 class="col-6 text-center text-wrap" style="font-size:1.5vw;">Our superstar!</h3>
                         </div>
-                
+                        <div class="row justify-content-center">
+                            <p class="col-6 text-center text-wrap" style="font-size:1vw;">See what you loved the most of our work.</p>
+                        </div>
+                        <hr />
+                        <div class="row justify-content-center">
+                            <h4 class="col text-center text-wrap " style="font-size:1.2vw;">@Model.HighestRatingRecipe.Title</h4>
+                        </div>
+                        <div class="row justify-content-center mb-3">
+                            <h5 class="col text-center text-wrap " style="max-width:50%;font-size:1vw;">@Model.HighestRatingRecipe.Description</h5>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -103,7 +104,7 @@
     @foreach (Recipe r in Model.Recipes)
     {
         if (r.IsPublic)
-         {
+        {
             <div class="col mb-4 ">
 
                 <div class="card h-100" style="width: 18rem;">
@@ -111,6 +112,8 @@
                     <div class="card-body">
                         <h3>@r.Title</h3>
                         <p class="card-text">@r.Description</p>
+                        <h6>Rating: @r.Average() <span class="fa fa-star" style="color: orange;"></span> </h6>
+
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-6 my-3">
@@ -118,10 +121,10 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
-            }
         }
+    }
 
 </div>
 
