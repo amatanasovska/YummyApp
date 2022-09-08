@@ -6,55 +6,67 @@
 
 <h2>ListEditorPosts</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PreparationTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Servings)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Author)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PreparationTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Servings)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "RecipeView", "Recipe", new { Id = item.Id }, new { @class = "btn btn-info" })
-            @Html.ActionLink("Edit", "RecipeEdit", "Recipe", new { Id = item.Id }, new { @class = "btn btn-secondary" })
-            @Html.ActionLink("Delete", "RecipeDelete", "Recipe", new { Id = item.Id }, new { @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
-
+<table class="table" id="table" style="padding:20px">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PreparationTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Servings)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PreparationTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Servings)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "RecipeView", "Recipe", new { Id = item.Id }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Edit", "RecipeEdit", "Recipe", new { Id = item.Id }, new { @class = "btn btn-secondary" })
+                    @Html.ActionLink("Delete", "RecipeDelete", "Recipe", new { Id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+@section Scripts
+{
+<script>
+    $(document).ready(function () {
+        $("#table").DataTable();
+    })
+    
+    </script>
+}

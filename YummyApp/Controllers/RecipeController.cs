@@ -118,7 +118,7 @@ namespace YummyApp.Controllers
             db.SavedRecipeUser.Add(new SavedRecipeUser() { RecipeId = recipeId, UserId = userId});
             
             db.SaveChanges();
-            return RedirectToAction("RecipeView", recipe);
+            return RedirectToAction("RecipeView", "Recipe",new { Id= recipeId });
         }
         [Authorize]
         public ActionResult CreateReview(NewRecipeViewModel model)
@@ -171,6 +171,32 @@ namespace YummyApp.Controllers
                 return View(result);
             }
         }
+        [Authorize]
+        public ActionResult EditReview(int reviewId)
+        {
+            if (reviewId == null)
+                return HttpNotFound("null arg reviewId");
+            var review = db.Reviews.Find(reviewId);
+            if (review.UserId.Equals(User.Identity.GetUserId()))
+                return View(review);
+            else
+                return HttpNotFound();
+        }
+         
+        public ActionResult ConfirmEditReview(Review model)
+        {
+            var id = model.Id;
+            var review = db.Reviews.Find(id);
+            review.Rating = model.Rating;
+            review.Content = model.Content;
+            db.SaveChanges();
+
+            var recipe = db.Recipes.Find(model.RecipeId);
+
+            return RedirectToAction("RecipeView",new { Id = recipe.Id });
+        }
+
+
     }
 
 }

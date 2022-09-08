@@ -13,12 +13,12 @@
         <div class="col">
             @if (!User.Identity.IsAuthenticated || !Model.isSaved)
             {
-                @Html.ActionLink("Save this recipe", "SaveRecipe", new { recipeId = Model.Recipe.Id });
+                @Html.ActionLink("Save this recipe", "SaveRecipe", new { recipeId = Model.Recipe.Id },new {@class="btn btn-success"});
 
             }
             else
             {
-                <div>You already saved this recipe!</div>
+                <h4>You already saved this recipe!</h4>
 
             }
             <h1>@Model.Recipe.Title</h1>
@@ -55,36 +55,76 @@
                 {
                     foreach (Review r in Model.AllReviews)
                     {
-                        
+
                         var user = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(r.UserId).UserName;
-                        <div class="col mb-4 ">
+                        if (r.UserId.Equals(User.Identity.GetUserId()))
+                        {<div class="col mb-4 ">
 
-                            <div class="card h-100" style="width: 18rem;">
-                                <div class="card-body">
+                                <div class="card h-100" style="width: 18rem;">
+                                    <div class="card-body">
 
-                                    @for (int i = 0; i < 5; i++)
-                                    {
-                                        if (i < r.Rating)
+                                        @for (int i = 0; i < 5; i++)
                                         {
-                                            <span class="fa fa-star" style="color: orange;"></span>
+                                            if (i < r.Rating)
+                                            {
+                                                <span class="fa fa-star" style="color: orange;"></span>
+                                            }
+                                            else
+                                            {
+                                                <span class="fa fa-star"></span>
+                                            }
                                         }
-                                        else
+
+                                        <p class="card-text">@r.Content - @user</p>
+
+                                        @{myReviewExists = true;
+                                            var rId = r.Id;
+                                            }
+                                        @using (Html.BeginForm("EditReview", "Recipe", new {reviewId = rId}))
                                         {
-                                            <span class="fa fa-star"></span>
+                                            <button type="submit" class="btn btn-secondary">Edit Review</button>
+
                                         }
-                                    }
 
-                                    <p class="card-text">@r.Content - @user</p>
-                                    @if (r.UserId.Equals(User.Identity.GetUserId()))
-                                    {
-                                        myReviewExists = true;
-                                        <button type="submit" class="btn btn-secondary">Edit Review</button>
 
-                                    }
+                                    </div>
                                 </div>
-                            </div>
 
-                        </div>
+                            </div>
+                        }
+                                            }
+                                            foreach (Review r in Model.AllReviews)
+                                            {
+
+                                                var user = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(r.UserId).UserName;
+                                                if (!r.UserId.Equals(User.Identity.GetUserId()))
+                                                {<div class="col mb-4 ">
+
+                                <div class="card h-100" style="width: 18rem;">
+                                    <div class="card-body">
+
+                                        @for (int i = 0; i < 5; i++)
+                                        {
+                                            if (i < r.Rating)
+                                            {
+                                                <span class="fa fa-star" style="color: orange;"></span>
+                                            }
+                                            else
+                                            {
+                                                <span class="fa fa-star"></span>
+                                            }
+                                        }
+
+                                        <p class="card-text">@r.Content - @user</p>
+
+                                        
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
                     }
                 }
             </div>
@@ -107,15 +147,15 @@
                                 <br />
 
                                 <div class="wrapper">
-                                    @Html.RadioButtonFor(model => model.NewReview.Rating, 1, new { name = "ratingRadio", type = "radio", id = "st1", value = "1" })
+                                    @Html.RadioButtonFor(model => model.NewReview.Rating, 5, new { name = "ratingRadio", type = "radio", id = "st1", value = "5" })
                                     <label for="st1"></label>
-                                    @Html.RadioButtonFor(model => model.NewReview.Rating, 2, new { name = "ratingRadio", type = "radio", id = "st2", value = "2" })
+                                    @Html.RadioButtonFor(model => model.NewReview.Rating, 4, new { name = "ratingRadio", type = "radio", id = "st2", value = "4" })
                                     <label for="st2"></label>
                                     @Html.RadioButtonFor(model => model.NewReview.Rating, 3, new { name = "ratingRadio", type = "radio", id = "st3", value = "3" })
                                     <label for="st3"></label>
-                                    @Html.RadioButtonFor(model => model.NewReview.Rating, 4, new { name = "ratingRadio", type = "radio", id = "st4", value = "4" })
+                                    @Html.RadioButtonFor(model => model.NewReview.Rating, 2, new { name = "ratingRadio", type = "radio", id = "st4", value = "2" })
                                     <label for="st4"></label>
-                                    @Html.RadioButtonFor(model => model.NewReview.Rating, 5, new { name = "ratingRadio", type = "radio", id = "st5", value = "5" })
+                                    @Html.RadioButtonFor(model => model.NewReview.Rating, 1, new { name = "ratingRadio", type = "radio", id = "st5", value = "1" })
                                     <label for="st5"></label>
 
                                     <!--<input name="ratingRadio" type="radio" id="st1" value="1" />

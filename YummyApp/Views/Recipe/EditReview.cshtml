@@ -1,0 +1,65 @@
+﻿@model YummyApp.Models.Review
+
+@{
+    ViewBag.Title = "RecipeEdit";
+}
+<link href="~/Content/stars.css" rel="stylesheet" />
+<h2>Edit Review</h2>
+
+@using (Html.BeginForm("ConfirmEditReview","Recipe"))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Review</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.RecipeId)
+    <div class="form-group">
+        @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="wrapper">
+            @Html.RadioButtonFor(model => model.Rating, 5, new { name = "ratingRadio", type = "radio", id = "st1", value = "5" })
+            <label for="st1"></label>
+            @Html.RadioButtonFor(model => model.Rating, 4, new { name = "ratingRadio", type = "radio", id = "st2", value = "4" })
+            <label for="st2"></label>
+            @Html.RadioButtonFor(model => model.Rating, 3, new { name = "ratingRadio", type = "radio", id = "st3", value = "3" })
+            <label for="st3"></label>
+            @Html.RadioButtonFor(model => model.Rating, 2, new { name = "ratingRadio", type = "radio", id = "st4", value = "2" })
+            <label for="st4"></label>
+            @Html.RadioButtonFor(model => model.Rating, 1, new { name = "ratingRadio", type = "radio", id = "st5", value = "1" })
+            <label for="st5"></label>
+
+            <!--<input name="ratingRadio" type="radio" id="st1" value="1" />
+            <label for="st1"></label>
+            <input name="ratingRadio" type="radio" id="st2" value="2" />
+            <label for="st2"></label>
+            <input name="ratingRadio" type="radio" id="st3" value="3" />
+            <label for="st3"></label>
+            <input name="ratingRadio" type="radio" id="st4" value="4" />
+            <label for="st4"></label>
+            <input name="ratingRadio" type="radio" id="st5" value="5" />-->
+        </div>
+        @*@Html.TextAreaFor(model => model.Content, new { @class = "form-control", @style = "resize: both;width:100 %;min-height:200px!important;max-width: 500px;margin-right: 0;max-height: 900px;" })*@
+        <input value="2" id="RecipeRating" name="RecipeRating" type="hidden">
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to Recipe", "RecipeView","Recipe", new { Id = Model.RecipeId})
+</div>
