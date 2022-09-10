@@ -8,7 +8,7 @@
 
 <h2>List of your saved recipes</h2>
 
-<div class="row row-cols-2 row-cols-md-3">
+<div class="row row-cols-2 row-cols-md-3 my-5">
     <!--<div class="card-columns">-->
 
     @foreach (Recipe r in Model)
@@ -25,8 +25,8 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-6 my-3">
-                            @Html.ActionLink("Show Recipe", "RecipeView", "Recipe", new { id = r.Id }, new { @class = "btn btn-success w-100" })
-                            @Html.ActionLink("Remove", "RemoveSavedRecipe", "Recipe", new { id = r.Id, userId = User.Identity.GetUserId() }, new { @class = "btn btn-danger" })
+                            @Html.ActionLink("Show Recipe", "RecipeView", "Recipe", new { id = r.Id }, new { @class = "btn btn-success w-100 my-1" })
+                            @Html.ActionLink("Remove", "RemoveSavedRecipe", "Recipe", new { id = r.Id, userId = User.Identity.GetUserId() }, new { @class = "btn btn-danger w-100 my-1" })
 
                         </div>
                     </div>

@@ -279,10 +279,21 @@ namespace YummyApp.Controllers
                     {
                         string path = Path.Combine(Server.MapPath("/Images"), model.Id+"-main"+Path.GetExtension(file.FileName));
                         file.SaveAs(path);
+                    
+                        db.Recipes.Find(model.Id).file = "/Images/" + model.Id + "-main"+Path.GetExtension(file.FileName);
+                        db.SaveChanges();
+                        ViewBag.FileStatus = "File uploaded successfully."; 
                     }
-                    db.Recipes.Find(model.Id).file = "/Images/" + model.Id + "-main"+Path.GetExtension(file.FileName);
+                    else
+                    {
+                    string path = Path.Combine(Server.MapPath("/Images"), "no-image.bmp");
+                    file.SaveAs(path);
+
+                    db.Recipes.Find(model.Id).file = "/Images/" + model.Id + "-main" + Path.GetExtension(file.FileName);
                     db.SaveChanges();
                     ViewBag.FileStatus = "File uploaded successfully.";
+                }
+                
                 }
                 catch (Exception)
                 {

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -18,8 +19,18 @@ namespace YummyApp.Controllers
         public ActionResult Index()
         {
             var recipes = db.Recipes.Where(r => r.IsPublic).ToList();
-            var dailyRecipeId = db.DailyRecipes.OrderByDescending(x => x.ValidityDate).First().RecipeId;
-            var recipeOfTheDay = db.Recipes.Where(r => r.Id == dailyRecipeId).First();
+            var dailyRecipes = db.DailyRecipes.OrderByDescending(x => x.ValidityDate).ToList();
+            int dailyRecipeId = -1;
+            Recipe recipeOfTheDay = recipes.ElementAt(0);
+            int index = 0;
+            while (true)
+            {   
+                dailyRecipeId = dailyRecipes.ElementAt(index++).RecipeId;
+                recipeOfTheDay = db.Recipes.Where(r => r.Id == dailyRecipeId).First();
+
+                if (recipeOfTheDay.IsPublic)
+                    break;
+            }
             var latestRecipe = db.Recipes.Where(r => r.IsPublic).OrderByDescending(x => x.Posted).First();
             var highest_review_rating = 0.0;
            List<Recipe> highestRatingRecipes = db.Recipes.Include("Reviews").Where(r=>r.IsPublic).ToList();
@@ -59,7 +70,7 @@ namespace YummyApp.Controllers
             {
                 saved = false;
             }
-            if (recipe.IsPublic || (recipe.Author==User.Identity.GetUserId() && User.IsInRole("Editor")) || User.IsInRole("Admin"))
+            if (recipe.IsPublic || (recipe.Author==User.Identity.GetUserName() && User.IsInRole("Editor")) || User.IsInRole("Admin"))
             {
                 return View(new NewRecipeViewModel() { Recipe = recipe, NewReview = new Review(), AllReviews = reviews ,isSaved = saved});
             }
@@ -71,7 +82,12 @@ namespace YummyApp.Controllers
         [Authorize]
         public ActionResult RecipeEdit(int Id)
         {
-            return View(db.Recipes.Find(Id));
+            var recipe = db.Recipes.Find(Id);
+            
+            if(recipe.Author.Equals(User.Identity.GetUserName()) || User.IsInRole("Admin"))
+                return View(recipe);
+
+            return HttpNotFound();
         }
         [Authorize]
         public ActionResult RecipeDelete(int Id)
@@ -98,9 +114,37 @@ namespace YummyApp.Controllers
             return RedirectToAction("SavedRecipes", "Account");
         }
         [Authorize]
-        public ActionResult EditRecipe(Recipe model)
+        public ActionResult EditRecipe(Recipe model, HttpPostedFileBase file)
         {
-            db.Entry(model).State = EntityState.Modified;
+            var recipe = db.Recipes.Find(model.Id);
+            var file_str = recipe.file;
+            try
+            {
+
+                //Method 2 Get file details from HttpPostedFileBase class    
+
+                if (file != null)
+                {
+                    string path = Path.Combine(Server.MapPath("/Images"), model.Id + "-main" + Path.GetExtension(file.FileName));
+                    file.SaveAs(path);
+
+                    //recipe.file = "/Images/" + model.Id + "-main" + Path.GetExtension(file.FileName);
+                    //recipe.file = path;
+                    ViewBag.FileStatus = "File uploaded successfully.";
+                }
+
+            }
+            catch (Exception)
+            {
+                ViewBag.FileStatus = "Error while file uploading."; ;
+            }
+            
+            TryUpdateModel(recipe);
+            if (file != null)
+                recipe.file = "/Images/" + model.Id + "-main" + Path.GetExtension(file.FileName);
+            else
+                recipe.file = file_str;
+
             db.SaveChanges();
             return RedirectToAction("ListRecipes", "Account");
         }

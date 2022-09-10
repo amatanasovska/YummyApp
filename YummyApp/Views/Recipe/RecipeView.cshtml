@@ -13,7 +13,7 @@
         <div class="col">
             @if (!User.Identity.IsAuthenticated || !Model.isSaved)
             {
-                @Html.ActionLink("Save this recipe", "SaveRecipe", new { recipeId = Model.Recipe.Id },new {@class="btn btn-success"});
+                @Html.ActionLink("Save this recipe", "SaveRecipe", new { recipeId = Model.Recipe.Id },new {@class="btn btn-success my-4"});
 
             }
             else
@@ -33,7 +33,7 @@
             </div>
             <br />
             <h3>Preparation:</h3>
-            @Html.Raw(HttpUtility.HtmlDecode(Model.Recipe.Content));
+            @Html.Raw(HttpUtility.HtmlDecode(Model.Recipe.Content))
 
             <br />
             <br />

@@ -47,10 +47,9 @@
             }
             <td>@r.Average()</td>
             <td>
-                @Html.ActionLink("Details", "RecipeView", "Recipe", new { Id = r.Id }, new { @class = "btn btn-info" })
-                @Html.ActionLink("Edit", "RecipeEdit", "Recipe", new { Id = r.Id }, new { @class = "btn btn-secondary" })
-                @Html.ActionLink("Delete", "RecipeDelete", "Recipe", new { Id = r.Id }, new { @class = "btn btn-danger" })
-
+                    @Html.ActionLink("Details", "RecipeView", "Recipe", new { Id = r.Id }, new { @class = "btn btn-info m-1" })
+                    @Html.ActionLink("Edit", "RecipeEdit", "Recipe", new { Id = r.Id }, new { @class = "btn btn-secondary m-1" })
+                    @Html.ActionLink("Delete", "RecipeDelete", "Recipe", new { Id = r.Id }, new { @class = "btn btn-danger m-1" })
             </td>
         </tr>
         }

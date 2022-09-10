@@ -1,7 +1,7 @@
 ﻿@model YummyApp.Models.Recipe
 
 @{
-    ViewBag.Title = "www.compilemode.com";
+    ViewBag.Title = "Upload Image";
 }
 
 @using (Html.BeginForm("UploadFiles", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -23,8 +23,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Upload" class="btn btn-primary" />
-                @Html.ActionLink("Skip for now", "ListRecipes","Account")
+                <input type="submit" value="Upload" class="btn btn-success" />
+                @Html.ActionLink("Skip for now", "ListRecipes","Account", new { style = "color:green" })
             </div>
         </div>
         <div class="form-group">
