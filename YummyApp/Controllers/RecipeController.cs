@@ -77,7 +77,7 @@ namespace YummyApp.Controllers
             {
                 var rnd = new Random();
                 return View(new NewRecipeViewModel() { Recipe = recipe, NewReview = new Review(), AllReviews = reviews ,isSaved = saved, 
-                    Recommendations = db.Recipes.ToList().Where(r => r.Type == recipe.Type).OrderBy(x => rnd.Next()).Take(3) });
+                    Recommendations = db.Recipes.Include(x=>x.Reviews).ToList().Where(r => r.Type == recipe.Type).OrderBy(x => rnd.Next()).Take(3)});
             }
             else
             {
