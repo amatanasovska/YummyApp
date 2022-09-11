@@ -1,0 +1,45 @@
+﻿@using YummyApp.Models
+@using Microsoft.AspNet.Identity;
+
+@model IEnumerable<Recipe>
+
+
+<h2 class="text-center my-3">@ViewBag.Title</h2>
+<hr />
+<h5 class="text-center font-italic">@ViewBag.Description</h5>
+<div class="w-100 my-5" style="height:600px;overflow:hidden">
+    <img  class="w-100" src="~/Images/@(ViewBag.Title).jpg"/>
+</div>
+<div class="container">
+    <!--<div class="card-columns">-->
+
+    @foreach (Recipe r in Model)
+    {
+        if (r.IsPublic)
+        {
+            <div class="row mb-4 ">
+
+                <div class="card w-100">
+                    
+                    <div class="card-body row">
+                        <div class="col my-3" style="height:250px;overflow:hidden">
+                            <img src="@r.file" class="card-img-top" alt="...">
+                        </div>
+                        <div class="col">
+                            <h3 class="text-center">@r.Title</h3>
+                            <p class="card-text text-center">@r.Description</p>
+
+                            <div class="row h-50 justify-content-center align-content-center">
+                                <div class="col-6 my-3">
+                                    @Html.ActionLink("Show Recipe", "RecipeView", "Recipe", new { id = r.Id }, new { @class = "btn btn-success w-100" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+    }
+
+</div>

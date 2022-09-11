@@ -7,6 +7,10 @@ using System.Web.Mvc;
 
 namespace YummyApp.Models
 {
+    public enum Category
+    {
+        Dessert, Breakfast, Lunch, Brunch, Dinner
+    }
     public class Recipe
     {
         public int Id { get; set; }
@@ -67,5 +71,7 @@ namespace YummyApp.Models
               return total;
 
         }
+
+        public Category Type { get; set; }
     }
 }

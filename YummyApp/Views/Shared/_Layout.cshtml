@@ -28,14 +28,41 @@
             <div class="mx-auto">
                 <!--<ul class="nav navbar-nav">-->
                 @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>*@
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>*@
                 @Html.Partial("_LoginPartial")
             </div>
-            @using (Html.BeginForm("SearchRecipe", "Recipe"))
-            {
-                <div class="collapse navbar-collapse" id="searchField">
+            
+            <div class="collapse navbar-collapse" id="searchField">
+                <hr />
+                <div class="container">
+                    <div class="row w-100">
+                        <h3 class="col text-center my-4" style="color:darkgreen">
+                            Discover recipes by type
+                        </h3>
+                        
+                    </div>
+                    <div class="row w-100 my-3">
+                        <div class="col container justify-content-center">
+                            @Html.ActionLink("Desserts", "ShowByCategory", "Recipe", new { categoryId = 0 }, new { @class = "btn btn-outline-success w-100"})
+                        </div>
+                        <div class="col container justify-content-center">
+                            @Html.ActionLink("Breakfast", "ShowByCategory", "Recipe", new { categoryId = 1 }, new { @class = "btn btn-outline-success w-100" })
+                        </div>
+                        <div class="col container justify-content-center">
+                            @Html.ActionLink("Lunch", "ShowByCategory", "Recipe", new { categoryId = 2 }, new { @class = "btn btn-outline-success w-100" })
+                        </div>
+                        <div class="col container justify-content-center">
+                            @Html.ActionLink("Brunch", "ShowByCategory", "Recipe", new { categoryId = 3 }, new { @class = "btn btn-outline-success w-100" })
+                        </div>
+                        <div class="col container justify-content-center">
+                            @Html.ActionLink("Dinner", "ShowByCategory", "Recipe", new { categoryId = 4 }, new { @class = "btn btn-outline-success w-100" })
+                        </div>
+                    </div>
+                </div>
+                @using (Html.BeginForm("SearchRecipe", "Recipe"))
+                {
                     <div class="container-fluid" style="margin:20px">
                         <div class="row" style="width:100%">
                             <div class="col container">
@@ -43,7 +70,7 @@
                             </div>
                             <div class="col">
                                 <form class="container">
-                                    <div class="row">
+                                    <div class="row container justify-content-center">
                                         <input name="model" class="form-control" style="margin:5px;display:inline-block;width:auto;" type="search" placeholder="Search" aria-label="Search">
                                         <button class="btn btn-outline-success" type="submit">Search</button>
 
@@ -53,9 +80,10 @@
                         </div>
 
                     </div>
-                </div>
-            }
-        </div>
+
+                }
+            </div>
+            </div>
 
     </div>
 

@@ -263,6 +263,10 @@
     <Compile Include="Migrations\202208112037335_saved-recipe-impl4.designer.cs">
       <DependentUpon>202208112037335_saved-recipe-impl4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202209111543258_category_recipe.cs" />
+    <Compile Include="Migrations\202209111543258_category_recipe.designer.cs">
+      <DependentUpon>202209111543258_category_recipe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DailyRecipe.cs" />
@@ -402,7 +406,12 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Breakfast.jpg" />
+    <Content Include="Images\Brunch.jpg" />
     <Content Include="Images\demo-image.jpg" />
+    <Content Include="Images\Dessert.jpg" />
+    <Content Include="Images\Dinner.jpg" />
+    <Content Include="Images\Lunch.jpg" />
     <Content Include="Images\no-image.bmp" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\rating-icon.png" />
@@ -671,6 +680,7 @@
     <Content Include="Views\Account\SavedRecipes.cshtml" />
     <Content Include="Views\Recipe\SearchRecipe.cshtml" />
     <Content Include="Views\Recipe\EditReview.cshtml" />
+    <Content Include="Views\Recipe\ShowByCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -752,6 +762,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208112037335_saved-recipe-impl4.resx">
       <DependentUpon>202208112037335_saved-recipe-impl4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209111543258_category_recipe.resx">
+      <DependentUpon>202209111543258_category_recipe.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

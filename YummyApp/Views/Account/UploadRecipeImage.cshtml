@@ -9,7 +9,7 @@
 
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Id);
-    <div>One more step... Upload picture for recipe @(Model.Id) </div>
+    <div>One more step... Upload picture for recipe @(Model.Title) </div>
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })

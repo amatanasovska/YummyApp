@@ -239,8 +239,31 @@ namespace YummyApp.Controllers
 
             return RedirectToAction("RecipeView",new { Id = recipe.Id });
         }
+        public ActionResult ShowByCategory(int categoryId)
+        {
+            var recipes = db.Recipes.Where(x => (int)x.Type == categoryId);
+            ViewBag.Title = (Category)categoryId;
+            if (categoryId == 0)
+                ViewBag.Description = "Welcome to our sweet wonderland. Learn how to make bakery-worthy breads, " +
+                                        "cakes, pies, muffins, and scones with our articles. Enjoy these delicious treats " +
+                                        "carefully chosen by our experienced team";
+            else if (categoryId == 1)
+                ViewBag.Description = "Good morning! We are glad you chose our recipes to start your day with. From sweet " +
+                                        "to salty treats, you can find everything here.";
+            else if (categoryId == 2)
+                ViewBag.Description = "Time for lunch! Check out our selection of tasty meals, carefully prepared by " +
+                                        "us. We hope you will enjoy preparing the meals as much as we loved creating the recipes.";
+            else if (categoryId == 3)
+                ViewBag.Description = "Brunch is our favorite daily meal. We love to prepare our brunch and in this section " +
+                                    " we would like to share some of our secrets and tricks for perfect brunch. Hope you like them!";
+            else if (categoryId == 4)
+                ViewBag.Description = "Good evening! Good dinner is a good reward for a productive and challenging day. We hope that " +
+                                        "you will accept our dinner suggestions and enjoy your dinner among your loved ones.";
+            return View(recipes.ToList());
+        }
 
 
     }
+
 
 }
