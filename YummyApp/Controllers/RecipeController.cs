@@ -79,7 +79,7 @@ namespace YummyApp.Controllers
                 return HttpNotFound();
             }
         }
-        [Authorize]
+        [Authorize(Roles = "Admin,Editor")]
         public ActionResult RecipeEdit(int Id)
         {
             var recipe = db.Recipes.Find(Id);
@@ -89,13 +89,13 @@ namespace YummyApp.Controllers
 
             return HttpNotFound();
         }
-        [Authorize]
+        [Authorize(Roles = "Admin,Editor")]
         public ActionResult RecipeDelete(int Id)
         {
 
             return View(db.Recipes.Find(Id));
         }
-        [Authorize]
+        [Authorize(Roles = "Admin,Editor")]
         public ActionResult DeleteRecipe(Recipe model, int Id)
         {
 

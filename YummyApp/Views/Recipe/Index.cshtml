@@ -9,7 +9,7 @@
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner mb-3">
         <div class="carousel-item active">
-            <div class="container-overlay" style="max-height: 800px;overflow: hidden">
+            <div class="container-overlay" style="max-height: 600px;overflow: hidden">
                 <a href="@Url.Action("RecipeView", new { Id = Model.RecipeOfTheDay.Id })">
                     <img src="@Model.RecipeOfTheDay.file" class="d-block w-100 image-home" alt="...">
                 </a>
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="carousel-item">
-            <div class="container-overlay" style="max-height: 800px;overflow: hidden">
+            <div class="container-overlay" style="max-height: 600px;overflow: hidden">
                 <a href="@Url.Action("RecipeView", new { Id = Model.LatestRecipe.Id })">
                     <img src="@Model.LatestRecipe.file" class="d-block w-100 image-home" alt="...">
                 </a>
@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="carousel-item">
-            <div class="container-overlay" style="max-height: 800px;overflow:hidden">
+            <div class="container-overlay" style="max-height: 600px;overflow:hidden">
                 <a href="@Url.Action("RecipeView", new { Id = Model.HighestRatingRecipe.Id })">
                     <img src="@Model.HighestRatingRecipe.file" class="d-block w-100 image-home" alt="...">
                 </a>
@@ -108,7 +108,9 @@
             <div class="col mb-4 ">
 
                 <div class="card h-100" style="/*width: 18rem;*/">
-                    <img src="@r.file" class="card-img-top" alt="..." style="height:250px">
+                    <div style="height:250px;overflow:hidden">
+                        <img src="@r.file" class="card-img-top" alt="...">
+                    </div>
                     <div class="card-body">
                         <h3>@r.Title</h3>
                         <p class="card-text">@r.Description</p>

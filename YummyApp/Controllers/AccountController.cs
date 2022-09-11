@@ -176,7 +176,7 @@ namespace YummyApp.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-        
+        [Authorize(Roles= "Admin,Editor")]
         public async Task<ActionResult> SiteSettings()
         {
             var latestRecipe = db.DailyRecipes.OrderByDescending(x => x.ValidityDate).First();
@@ -258,12 +258,17 @@ namespace YummyApp.Controllers
             var SavedRecipes = new List<Recipe>();
             foreach(SavedRecipeUser s in SavedRecipeUser)
             {
-                SavedRecipes.Add(db.Recipes.Find(s.RecipeId));
+                var recipe = db.Recipes.Find(s.RecipeId);
+                if(recipe!=null)
+                    SavedRecipes.Add(recipe);
             }
             return View(SavedRecipes); 
         }
         public ActionResult UploadRecipeImage(Recipe recipe)
         {
+            if (recipe == null)
+                return HttpNotFound();
+
             return View(recipe);
         }
         [HttpPost]
@@ -302,10 +307,12 @@ namespace YummyApp.Controllers
             
             return View("UploadRecipeImage",model);
         }
+        [Authorize(Roles = "Admin")]
         public ActionResult ListEditorPosts(string Id)
         {
             return View(db.Recipes.Where(r => r.Author == db.Users.FirstOrDefault(u => u.Id == Id).UserName).ToList());
         }
+        [Authorize(Roles = "Admin")]
         public ActionResult RemoveEditorRole(string Id)
         {
             
@@ -313,6 +320,7 @@ namespace YummyApp.Controllers
 
             return RedirectToAction("ManageEditors");
         }
+        [Authorize(Roles = "Admin,Editor")]
         public ActionResult SelectDayRecipe()
         {
             List<Recipe> recipes = null;
@@ -326,6 +334,7 @@ namespace YummyApp.Controllers
             }
             return View(recipes);
         }
+        [Authorize(Roles = "Admin,Editor")]
         public ActionResult ChooseDayRecipe(int Id)
         {
             var latestRecipe = db.DailyRecipes.OrderByDescending(x => x.ValidityDate).First();
