@@ -189,8 +189,15 @@
                             if (result.length != 0) {
                                 content = ""
                                 for (var element in result) {
+                                    //var flag = true
                                     for (var key in result[element]) {
-                                        content += `<li class="list-group-item">${map_key[key]}: ${result[element][key]}</li>`
+                                        if (key=="name") {
+                                            content += `<li class="list-group-item list-group-item-success">${map_key[key]}: ${result[element][key]}</li>`
+                                            //flag=false
+                                        }
+                                        else {
+                                            content += `<li class="list-group-item">${map_key[key]}: ${result[element][key]}</li>`
+                                        }
                                     }
                                 }
                             }
