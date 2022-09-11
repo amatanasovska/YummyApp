@@ -16,7 +16,7 @@
         </div>
     </li>
     <li class="nav-item dropdown nav-tab">
-        <a class="nav-link dropdown-toggle tab-nav" id="accountLink" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Account</a>
+        <a class="nav-link dropdown-toggle tab-nav" id="accountLink" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Hi @User.Identity.GetUserName()</a>
         <div class="dropdown-menu">
             <a class="dropdown-item" href="@Url.Action("SavedRecipes","Account")">Saved recipes</a>
             <a class="dropdown-item" href="@Url.Action("UserReviews","Account")">My ratings</a>

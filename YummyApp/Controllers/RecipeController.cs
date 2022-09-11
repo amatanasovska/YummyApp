@@ -18,7 +18,10 @@ namespace YummyApp.Controllers
         // GET: Recipe
         public ActionResult Index()
         {
-            var recipes = db.Recipes.Where(r => r.IsPublic).ToList();
+            var recipes_tmp = db.Recipes.Where(r => r.IsPublic).OrderByDescending(r => r.Id).ToList();
+            var recipes = recipes_tmp;
+            if(recipes_tmp.Count>6)
+                recipes = recipes_tmp.GetRange(0, 6);
             var dailyRecipes = db.DailyRecipes.OrderByDescending(x => x.ValidityDate).ToList();
             int dailyRecipeId = -1;
             Recipe recipeOfTheDay = recipes.ElementAt(0);

@@ -97,7 +97,7 @@
         <span class="sr-only">Next</span>
     </button>
 </div>
-<h2 class="my-5">All recipes</h2>
+<h2 class="my-5">Latest recipes</h2>
 <div class="row row-cols-2 row-cols-md-3">
     <!--<div class="card-columns">-->
 
@@ -127,10 +127,91 @@
             </div>
         }
     }
-
+        
 </div>
 
+<hr />
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="container">
+                    <h4 class="my-4 text-center w-100 text-secondary">Want to know your favourite food's nutritional value?</h4>
+                    <div class="row justify-content-center w-100 my-4">
+                        <input type="text" id="food-input" class="form-control" />
+                    </div>
+                    <div class="row justify-content-center w-100">
+                        <input type="button" id="find-nutrition" value="Find out" class="btn btn-outline-success" />
+                    </div>
+                </div>
+
+                <div id="result" class="col text-center my-4">
+                    <ul class="list-group list-group-flush">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 @{
- //   Html.ActionLink("Show All Recipes", "RecipeView", new { id = 0 }, new { @class = "btn btn-light w-100 col-2" })
+    //   Html.ActionLink("Show All Recipes", "RecipeView", new { id = 0 }, new { @class = "btn btn-light w-100 col-2" })
 }
 
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#find-nutrition").on("click", function () { 
+                var query = $("#food-input").val();
+                console.log(query);
+                if (query != "") {
+                    $.ajax({
+                        method: 'GET',
+                        url: 'https://api.api-ninjas.com/v1/nutrition?query=' + query,
+                        headers: { 'X-Api-Key': 'lCeHMretqiLKF3cMaiWMvQ==ZpD0g6FyHvv0yJnd' },
+                        contentType: 'application/json',
+                        success: function (result) {
+                            var map_key = {
+                                "name": "You searched for",
+                                "calories": "Calories",
+                                "serving_size_g": "Information for serving size (in grams)",
+                                "fat_total_g": "Fat (in grams)",
+                                "fat_saturated_g": "Saturated fat (in grams)",
+                                "protein_g": "Protein (in grams)",
+                                "sodium_mg": "Sodium (in mg)",
+                                "potassium_mg": "Potassium (in mg)",
+                                "cholesterol_mg": "Cholesterol (in mg)",
+                                "carbohydrates_total_g": "Total carbohydrates (in grams)",
+                                "fiber_g": "Fiber (in grams)",
+                                "sugar_g": "Sugar (in grams)"
+                            };
+                            console.log(result);
+                            var content = "Couldn't find entry. Please enter valid data."
+                            if (result.length != 0) {
+                                content = ""
+                                for (var element in result) {
+                                    for (var key in result[element]) {
+                                        content += `<li class="list-group-item">${map_key[key]}: ${result[element][key]}</li>`
+                                    }
+                                }
+                            }
+
+                            $("#result").html(content);
+                            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                        },
+                        error: function ajaxError(jqXHR) {
+                            console.error('Error: ', jqXHR.responseText);
+                            $("#result").html("Error while making request. Please try again later.");
+                            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                        }
+                    });
+                }
+                else {
+                    $("#result").html("Couldn't find entry. Please enter valid data.");
+                }
+               
+
+            })
+        })
+       
+    </script>
+}

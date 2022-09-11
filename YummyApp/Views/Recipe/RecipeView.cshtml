@@ -11,16 +11,7 @@
 <div class="container">
     <div class="row my-5">
         <div class="col">
-            @if (!User.Identity.IsAuthenticated || !Model.isSaved)
-            {
-                @Html.ActionLink("Save this recipe", "SaveRecipe", new { recipeId = Model.Recipe.Id },new {@class="btn btn-success my-4"});
-
-            }
-            else
-            {
-                <h4>You already saved this recipe!</h4>
-
-            }
+            
             <h1>@Model.Recipe.Title</h1>
 
             @Html.DisplayFor(model => model.Recipe.Description)
@@ -43,6 +34,21 @@
         </div>
         <div class="col">
             <img width="500px" src="@Model.Recipe.file" />
+            @if (!User.Identity.IsAuthenticated || !Model.isSaved)
+            {
+                @Html.ActionLink("Save this recipe", "SaveRecipe", new { recipeId = Model.Recipe.Id }, new { @class = "btn btn-success my-4" });
+
+            }
+            else
+            {
+                <h4 class="my-4">You already saved this recipe!</h4>
+
+            }
+            @if ((User.Identity.GetUserName().Equals(Model.Recipe.Author) && User.IsInRole("Editor")) || User.IsInRole("Admin"))
+            { 
+                @Html.ActionLink("Edit", "RecipeEdit", "Recipe", new { Id = Model.Recipe.Id }, new { @class = "btn btn-secondary m-1" })
+                @Html.ActionLink("Delete", "RecipeDelete", "Recipe", new { Id = Model.Recipe.Id }, new { @class = "btn btn-danger m-1" })
+            }
         </div>
     </div>
     <div class="row">
