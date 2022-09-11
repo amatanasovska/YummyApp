@@ -75,7 +75,9 @@ namespace YummyApp.Controllers
             }
             if (recipe.IsPublic || (recipe.Author==User.Identity.GetUserName() && User.IsInRole("Editor")) || User.IsInRole("Admin"))
             {
-                return View(new NewRecipeViewModel() { Recipe = recipe, NewReview = new Review(), AllReviews = reviews ,isSaved = saved});
+                var rnd = new Random();
+                return View(new NewRecipeViewModel() { Recipe = recipe, NewReview = new Review(), AllReviews = reviews ,isSaved = saved, 
+                    Recommendations = db.Recipes.ToList().Where(r => r.Type == recipe.Type).OrderBy(x => rnd.Next()).Take(3) });
             }
             else
             {

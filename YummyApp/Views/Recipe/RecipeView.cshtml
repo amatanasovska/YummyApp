@@ -33,23 +33,27 @@
             @Html.HiddenFor(model => model.Recipe.Id);
         </div>
         <div class="col">
-            <img width="500px" src="@Model.Recipe.file" />
-            @if (!User.Identity.IsAuthenticated || !Model.isSaved)
-            {
-                @Html.ActionLink("Save this recipe", "SaveRecipe", new { recipeId = Model.Recipe.Id }, new { @class = "btn btn-success my-4" });
+           <div class="row">
+               <img width="500px" src="@Model.Recipe.file" />
+           </div> 
+           <div class="row">
+               @if (!User.Identity.IsAuthenticated || !Model.isSaved)
+               {
+                   @Html.ActionLink("Save this recipe", "SaveRecipe", new { recipeId = Model.Recipe.Id }, new { @class = "btn btn-success my-4 mx-2" });
 
-            }
-            else
-            {
-                <h4 class="my-4">You already saved this recipe!</h4>
+               }
+               else
+               {
+                   <h4 class="my-4">You already saved this recipe!</h4>
 
-            }
-            @if ((User.Identity.GetUserName().Equals(Model.Recipe.Author) && User.IsInRole("Editor")) || User.IsInRole("Admin"))
-            { 
-                @Html.ActionLink("Edit", "RecipeEdit", "Recipe", new { Id = Model.Recipe.Id }, new { @class = "btn btn-secondary m-1" })
-                @Html.ActionLink("Delete", "RecipeDelete", "Recipe", new { Id = Model.Recipe.Id }, new { @class = "btn btn-danger m-1" })
-            }
-        </div>
+               }
+               @if ((User.Identity.GetUserName().Equals(Model.Recipe.Author) && User.IsInRole("Editor")) || User.IsInRole("Admin"))
+               {
+                   @Html.ActionLink("Edit", "RecipeEdit", "Recipe", new { Id = Model.Recipe.Id }, new { @class = "btn btn-secondary my-4 mx-2" })
+                   @Html.ActionLink("Delete", "RecipeDelete", "Recipe", new { Id = Model.Recipe.Id }, new { @class = "btn btn-danger my-4 mx-2" })
+               }
+            </div>
+           </div>
     </div>
     <div class="row">
         <div class="container">
@@ -135,6 +139,7 @@
                 }
             </div>
             <br />
+            <hr />
             <div class="row">
 
                 <div class="col">
@@ -146,12 +151,16 @@
                             @Html.HiddenFor(model => model.Recipe.Id);
 
                       
-                            <div class="form-group">
+                    <div class="form-group row justify-content-center">
+                        <div class="col">
+                            <div class="row justify-content-center">
                                 <label for="review">
                                     <h4>Your review:</h4>
                                 </label>
-                                <br />
+                            @*</div>
 
+                            <br />
+                            <div class="row justify-content-center">*@
                                 <div class="wrapper">
                                     @Html.RadioButtonFor(model => model.NewReview.Rating, 5, new { name = "ratingRadio", type = "radio", id = "st1", value = "5" })
                                     <label for="st1"></label>
@@ -165,31 +174,73 @@
                                     <label for="st5"></label>
 
                                     <!--<input name="ratingRadio" type="radio" id="st1" value="1" />
-                                    <label for="st1"></label>
-                                    <input name="ratingRadio" type="radio" id="st2" value="2" />
-                                    <label for="st2"></label>
-                                    <input name="ratingRadio" type="radio" id="st3" value="3" />
-                                    <label for="st3"></label>
-                                    <input name="ratingRadio" type="radio" id="st4" value="4" />
-                                    <label for="st4"></label>
-                                    <input name="ratingRadio" type="radio" id="st5" value="5" />-->
+        <label for="st1"></label>
+        <input name="ratingRadio" type="radio" id="st2" value="2" />
+        <label for="st2"></label>
+        <input name="ratingRadio" type="radio" id="st3" value="3" />
+        <label for="st3"></label>
+        <input name="ratingRadio" type="radio" id="st4" value="4" />
+        <label for="st4"></label>
+        <input name="ratingRadio" type="radio" id="st5" value="5" />-->
                                 </div>
-                                @Html.TextAreaFor(model => model.NewReview.Content, new { @class = "form-control", @style = "resize: both;width:100 %;min-height:200px!important;max-width: 500px;margin-right: 0;max-height: 900px;" })
-                                <input value="2" id="RecipeRating" name="RecipeRating" type="hidden">
                             </div>
+                                <div class="row justify-content-center">
+                                   
+                                    @Html.TextAreaFor(model => model.NewReview.Content, new { @class = "form-control", @style = "resize: both;width:100 %;min-height:200px!important;max-width: 500px;margin-right: 0;max-height: 900px;" })
+                                    <input value="2" id="RecipeRating" name="RecipeRating" type="hidden">
+                                </div>
 
-                            <div class="form-group">
-                                <button type="submit" value="CreateReview" class="btn btn-outline-success"> Add review</button>
+                                <div class="row justify-content-center">
+                                    <div class="form-group">
+                                        <button type="submit" value="CreateReview" class="btn btn-outline-success my-3"> Add review</button>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
                         }
-                    }
-                    else if(!User.Identity.IsAuthenticated)
-                    {
+                        }
+                        else if(!User.Identity.IsAuthenticated)
+                        {
                         <div class="text-center">Please @Html.ActionLink("log in", "LogIn", "Account") to leave a review</div>
-                    }
-                </div>
+                        }
+                    </div>
             </div>
 
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <h3 class="text-center my-5 w-100 text-secondary">Other @Model.Recipe.Type.ToString().ToLower() recipes:</h3>
+
+        <div class="col">
+            <div class="row">
+                @foreach (Recipe r in Model.Recommendations)
+                {
+                    if (r.IsPublic)
+                    {
+                        <div class="col mb-4 ">
+
+                            <div class="card h-100" style="/*width: 18rem;*/">
+                                <div style="height:250px;overflow:hidden">
+                                    <img src="@r.file" class="card-img-top" alt="...">
+                                </div>
+                                <div class="card-body">
+                                    <h3>@r.Title</h3>
+                                    <p class="card-text">@r.Description</p>
+                                    <h6>Rating: @r.Average() <span class="fa fa-star" style="color: orange;"></span> </h6>
+
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-6 my-3">
+                                        @Html.ActionLink("Show Recipe", "RecipeView", new { id = r.Id }, new { @class = "btn btn-success w-100" })
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                }
+            </div>
         </div>
     </div>
 </div>

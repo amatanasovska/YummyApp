@@ -267,6 +267,10 @@
     <Compile Include="Migrations\202209111543258_category_recipe.designer.cs">
       <DependentUpon>202209111543258_category_recipe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202209112233352_del-logs.cs" />
+    <Compile Include="Migrations\202209112233352_del-logs.designer.cs">
+      <DependentUpon>202209112233352_del-logs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DailyRecipe.cs" />
@@ -765,6 +769,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202209111543258_category_recipe.resx">
       <DependentUpon>202209111543258_category_recipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209112233352_del-logs.resx">
+      <DependentUpon>202209112233352_del-logs.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
