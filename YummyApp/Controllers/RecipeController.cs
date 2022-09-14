@@ -88,10 +88,11 @@ namespace YummyApp.Controllers
         public ActionResult RecipeEdit(int Id)
         {
             var recipe = db.Recipes.Find(Id);
-            
-            if(recipe.Author.Equals(User.Identity.GetUserName()) || User.IsInRole("Admin"))
-                return View(recipe);
-
+            if (recipe != null)
+            {
+                if (recipe.Author.Equals(User.Identity.GetUserName()) || User.IsInRole("Admin"))
+                    return View(recipe);
+            }
             return HttpNotFound();
         }
         [Authorize(Roles = "Admin,Editor")]
@@ -105,8 +106,11 @@ namespace YummyApp.Controllers
         {
 
             Recipe recipe = db.Recipes.Find(Id);
-            db.Recipes.Remove(recipe);
-            db.SaveChanges();
+            if (recipe != null)
+            {
+                db.Recipes.Remove(recipe);
+                db.SaveChanges();
+            }
             return RedirectToAction("ListRecipes", "Account");
         }
         [Authorize]

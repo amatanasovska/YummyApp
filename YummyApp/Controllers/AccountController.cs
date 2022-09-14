@@ -243,11 +243,15 @@ namespace YummyApp.Controllers
         [Authorize(Roles = "Admin,Editor")]
         public ActionResult CreateRecipe(Recipe model)
         {
-            db.Recipes.Add(model);
-            model.Author = User.Identity.GetUserName();
-            model.file = "/Images/no-image.bmp";
-            db.SaveChanges();
-            return View("UploadRecipeImage", model);
+            if (model != null)
+            {
+                db.Recipes.Add(model);
+                model.Author = User.Identity.GetUserName();
+                model.file = "/Images/no-image.png";
+                db.SaveChanges();
+                return View("UploadRecipeImage", model);
+            }
+            return HttpNotFound();
         }
         [Authorize]
         public ActionResult SavedRecipes()
@@ -291,13 +295,13 @@ namespace YummyApp.Controllers
                     }
                     else
                     {
-                    string path = Path.Combine(Server.MapPath("/Images"), "no-image.bmp");
-                    file.SaveAs(path);
+                    //string path = Path.Combine(Server.MapPath("/Images"), "no-image.bmp");
+                    //file.SaveAs(path);
 
-                    db.Recipes.Find(model.Id).file = "/Images/" + model.Id + "-main" + Path.GetExtension(file.FileName);
+                    db.Recipes.Find(model.Id).file = "/Images/no-image.png";
                     db.SaveChanges();
-                    ViewBag.FileStatus = "File uploaded successfully.";
-                }
+                    //ViewBag.FileStatus = "File uploaded successfully.";
+                    }
                 
                 }
                 catch (Exception)
@@ -305,7 +309,7 @@ namespace YummyApp.Controllers
                     ViewBag.FileStatus = "Error while file uploading."; ;
                 }
             
-            return View("UploadRecipeImage",model);
+            return View("~/Recipe/RecipeView",model);
         }
         [Authorize(Roles = "Admin")]
         public ActionResult ListEditorPosts(string Id)
