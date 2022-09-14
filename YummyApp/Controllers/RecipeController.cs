@@ -100,8 +100,8 @@ namespace YummyApp.Controllers
 
             return View(db.Recipes.Find(Id));
         }
-        [Authorize(Roles = "Admin,Editor")]
-        public ActionResult DeleteRecipe(Recipe model, int Id)
+        //[Authorize(Roles = "Admin,Editor")]
+        public ActionResult DeleteRecipe(int Id)
         {
 
             Recipe recipe = db.Recipes.Find(Id);

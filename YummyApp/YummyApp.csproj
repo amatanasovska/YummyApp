@@ -421,6 +421,8 @@
     <Content Include="Images\rating-icon.png" />
     <Content Include="Images\shopping-cart.png" />
     <Content Include="libman.json" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />

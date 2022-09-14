@@ -34,31 +34,49 @@
                 {
                     <div>Null</div>
                 }*@
-        <tr>
-            <td scope="row">@r.Id</td>
-            <td>@r.Title</td>
-            @if (r.Description.Length > 50)
-            {
-                <td>@r.Description.Substring(0, 50) ...</td>
-            }
-            else
-            {
-                <td>@r.Description</td>
-            }
-            <td>@r.Average()</td>
-            <td>
+            <tr>
+                <td scope="row">@r.Id</td>
+                <td>@r.Title</td>
+                @if (r.Description.Length > 50)
+                {
+                    <td>@r.Description.Substring(0, 50) ...</td>
+                }
+                else
+                {
+                    <td>@r.Description</td>
+                }
+                <td>@r.Average()</td>
+                <td>
                     @Html.ActionLink("Details", "RecipeView", "Recipe", new { Id = r.Id }, new { @class = "btn btn-info m-1" })
                     @Html.ActionLink("Edit", "RecipeEdit", "Recipe", new { Id = r.Id }, new { @class = "btn btn-secondary m-1" })
-                    @Html.ActionLink("Delete", "RecipeDelete", "Recipe", new { Id = r.Id }, new { @class = "btn btn-danger m-1" })
-            </td>
-        </tr>
+                    @*@Html.ActionLink("Delete", "RecipeDelete", "Recipe", new { Id = r.Id }, new { @class = "btn btn-danger m-1 js-delete", @id=r.Id})*@
+                    <button class = "btn btn-danger m-1 js-delete" recipe-id="@r.Id">Delete</button>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
 @section Scripts{
-<script>
-    $(document).ready(function () {
-        $("#recipes").DataTable();
-    });
-    </script>    
+    
+
+    <script>
+        $(document).ready(function () {
+            var table = $("#recipes").DataTable();
+            $("#recipes .js-delete").on("click", function () {
+                var button = $(this);
+                bootbox.confirm("Do you want to delete this recipe?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/Recipe/DeleteRecipe/" + button.attr("recipe-id"),
+                            method: "POST",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
 }
