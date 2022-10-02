@@ -9,8 +9,9 @@ namespace YummyApp
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/DataTables/jquery.dataTables.js",
+                        
                         "~/Scripts/DataTables/dataTables.bootstrap.js",
+                        "~/Scripts/DataTables/jquery.dataTables.js",
                         "~/Scripts/jquery-{version}.js"
                         ));
 

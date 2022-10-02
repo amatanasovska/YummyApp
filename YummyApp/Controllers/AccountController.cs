@@ -309,7 +309,7 @@ namespace YummyApp.Controllers
                     ViewBag.FileStatus = "Error while file uploading."; ;
                 }
             
-            return View("~/Recipe/RecipeView",model);
+            return RedirectToAction("RecipeView","Recipe",new {Id = model.Id});
         }
         [Authorize(Roles = "Admin")]
         public ActionResult ListEditorPosts(string Id)
