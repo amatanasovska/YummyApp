@@ -327,6 +327,15 @@ namespace YummyApp.Controllers
         [Authorize(Roles = "Admin,Editor")]
         public ActionResult SelectDayRecipe()
         {
+            var latestRecipe = db.DailyRecipes.OrderByDescending(x => x.ValidityDate).First();
+            var Editors = (from u in db.Users
+                           where u.Roles.Any(r => r.RoleId == "1" && r.RoleId != "0")
+                           select u).ToList();
+            var numberOfEditors = Editors.Count();
+            if (!User.IsInRole("Admin") && User.Identity.GetUserId() != Editors.ElementAt((latestRecipe.Id + 1) % numberOfEditors).Id)
+            {
+                return HttpNotFound();
+            }
             List<Recipe> recipes = null;
             if (User.IsInRole("Editor"))
             {
