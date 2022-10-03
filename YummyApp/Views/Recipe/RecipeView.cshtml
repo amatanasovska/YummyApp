@@ -90,7 +90,7 @@
                                         @{myReviewExists = true;
                                             var rId = r.Id;
                                         }
-                                        @using (Html.BeginForm("EditReview", "Recipe", new { reviewId = rId }, FormMethod.Get, new {Id = "editReview"}))
+                                        @using (Html.BeginForm("EditReview", "Recipe", new { reviewId = rId }, FormMethod.Post, new {Id = "editReview"}))
                                         {
                                             <button type="submit" class="btn btn-secondary mx-1 my-1">Edit Review</button>
 

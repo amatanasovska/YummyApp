@@ -6,7 +6,7 @@
 
 <h2>Manage Editors</h2>
 
-<table class="table table-striped">
+<table class="table table-striped" id="editors">
     <thead>
         <tr>
             <th scope="col">Id</th>
@@ -17,17 +17,43 @@
     <tbody>
         @foreach (ApplicationUser u in Model)
         {
-            
+
             <tr>
                 <th scope="row">@u.Id</th>
                 <td>@u.UserName</td>
-    
+
                 <td>
                     @Html.ActionLink("See posts", "ListEditorPosts", "Account", new { Id = u.Id }, new { @class = "btn btn-info" })
-                    @Html.ActionLink("Remove editor", "RemoveEditorRole", "Account", new { Id = u.Id }, new { @class = "btn btn-danger" })
+                    @*@Html.ActionLink("Remove editor", "RemoveEditorRole", "Account", new { Id = u.Id }, new { @class = "btn btn-danger" })*@
+                    <button class="btn btn-danger m-1 js-delete" editor-id="@u.Id">Remove Editor</button>
 
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+@section Scripts{
+
+
+    <script>
+        $(document).ready(function () {
+            var table = $("#editors").DataTable();
+            $("#editors tbody").on("click", ".js-delete",function () {
+                var button = $(this);
+                bootbox.confirm("Do you want to delete this editor?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/Account/RemoveEditorRole/" + button.attr("editor-id"),
+                            method: "POST",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+}
