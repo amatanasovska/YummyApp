@@ -237,7 +237,7 @@ namespace YummyApp.Controllers
             else
                 return HttpNotFound();
         }
-         
+        
         public ActionResult ConfirmEditReview(Review model)
         {
             var id = model.Id;
@@ -249,6 +249,23 @@ namespace YummyApp.Controllers
             var recipe = db.Recipes.Find(model.RecipeId);
 
             return RedirectToAction("RecipeView",new { Id = recipe.Id });
+        }
+        [Authorize]
+        public ActionResult DeleteReview(int reviewId)
+        {
+            if (reviewId == null)
+                return HttpNotFound("null arg reviewId");
+            var review = db.Reviews.Find(reviewId);
+
+            if (review.UserId.Equals(User.Identity.GetUserId()))
+            {
+                var recipeId = review.RecipeId;
+                db.Reviews.Remove(review);
+                db.SaveChanges();
+                return RedirectToAction("RecipeView", new { Id = recipeId });
+            }
+            else
+                return HttpNotFound();
         }
         public ActionResult ShowByCategory(int categoryId)
         {

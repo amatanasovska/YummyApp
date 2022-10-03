@@ -144,7 +144,8 @@
                     </div>
                 </div>
 
-                <div id="result" class="col text-center my-4">
+                <div id="result" class="col text-center my-4 align-content-center">
+                    <img src="~/Images/loading.gif" id="loading" height="50" width="80" style="display:none;"/>
                     <ul class="list-group list-group-flush">
 
                     </ul>
@@ -164,11 +165,22 @@
                 var query = $("#food-input").val();
                 console.log(query);
                 if (query != "") {
+                    var executed = false;
                     $.ajax({
                         method: 'GET',
                         url: 'https://api.api-ninjas.com/v1/nutrition?query=' + query,
                         headers: { 'X-Api-Key': 'lCeHMretqiLKF3cMaiWMvQ==ZpD0g6FyHvv0yJnd' },
                         contentType: 'application/json',
+                        beforeSend: function () {
+                            if (!executed) {
+                                $("#loading").css("display","initial")
+                                executed = true;
+                            }
+                        },
+                        complete: function () {
+                            // Hide loading
+                            $("#loading").css("display", "none")
+                        },
                         success: function (result) {
                             var map_key = {
                                 "name": "You searched for",
