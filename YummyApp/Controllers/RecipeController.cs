@@ -24,17 +24,29 @@ namespace YummyApp.Controllers
                 recipes = recipes_tmp.GetRange(0, 6);
             var dailyRecipes = db.DailyRecipes.OrderByDescending(x => x.ValidityDate).ToList();
             int dailyRecipeId = -1;
-            Recipe recipeOfTheDay = recipes.ElementAt(0);
+            Recipe recipeOfTheDay = new Recipe() { Author="", Content="",Description="",Title="", PreparationTime="",Servings=0,file=""};
             int index = 0;
             while (true)
             {   
-                dailyRecipeId = dailyRecipes.ElementAt(index++).RecipeId;
-                recipeOfTheDay = db.Recipes.Where(r => r.Id == dailyRecipeId).First();
-
-                if (recipeOfTheDay.IsPublic)
+                if (dailyRecipes.Count <= index || dailyRecipes.Count==0)
                     break;
+
+                dailyRecipeId = dailyRecipes.ElementAt(index++).RecipeId;
+                var tmpDailyRecipes = db.Recipes.Where(r => r.Id == dailyRecipeId);
+                if(tmpDailyRecipes.Count()!=0)
+                    
+                if (tmpDailyRecipes.First().IsPublic)
+                {
+                    recipeOfTheDay = tmpDailyRecipes.First();
+                    break; 
+                }
+         
+                
             }
-            var latestRecipe = db.Recipes.Where(r => r.IsPublic).OrderByDescending(x => x.Posted).First();
+            var descendingPostedRecipes = db.Recipes.Where(r => r.IsPublic).OrderByDescending(x => x.Posted);
+            var latestRecipe = new Recipe() { Author = "", Content = "", Description = "", Title = "", PreparationTime = "", Servings = 0, file = "" };
+            if(descendingPostedRecipes.Count()!=0)
+                latestRecipe = descendingPostedRecipes.First();
             var highest_review_rating = 0.0;
            List<Recipe> highestRatingRecipes = db.Recipes.Include("Reviews").Where(r=>r.IsPublic).ToList();
             var highestRatingRecipe = recipeOfTheDay;
